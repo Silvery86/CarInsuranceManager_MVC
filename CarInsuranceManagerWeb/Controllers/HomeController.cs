@@ -18,7 +18,19 @@ namespace CarInsuranceManagerWeb.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult Car()
+        {
+            return View();
+        }
+        public IActionResult Bike()
         {
             return View();
         }
