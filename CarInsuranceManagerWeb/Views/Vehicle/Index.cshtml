@@ -1,1 +1,91 @@
-﻿<h1>Vehicle List</h1>
+﻿@model List<Vehicle>
+
+<!-- Hero Image Starts here -->
+<div class="hero-image-small hero-small-car">
+    <div class="container">
+        <div class="hero-text-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
+                    <h3><span class="sub-heading-1"></span>Vehicle List</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Image Ends here -->
+<div class="container">
+    <div class="row mt-3 mb-3">
+    <div class="col-6">
+        <a class="btn btn-primary" asp-controller="Vehicle" asp-action="Create">
+            <i class="bi bi-plus-circle"></i> Add New Vehicle
+        </a>
+    </div>
+    </div>
+</div>
+<div class="container">
+    
+<table class="table table-bordered table-striped">
+    <thead>
+
+        <tr>
+            <th>
+                Vehicle Name
+            </th>
+            <th>
+                Owner Name
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Version
+            </th>
+            <th>
+                Insurance Rate
+            </th>
+            <th>
+                Body Number
+            </th>
+            <th>
+                Engine Number
+            </th>
+            <th>
+                Number
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            
+        <tr>
+            <td>
+                @vehicle.Name
+            </td>
+                <td>
+                    @vehicle.OwnerName
+                </td>
+                <td>
+                    @vehicle.Model
+                </td>
+                <td>
+                    @vehicle.Version
+                </td>
+                <td>
+                    @vehicle.Rate
+                </td>
+                <td>
+                    @vehicle.BodyNumber
+                </td>
+                <td>
+                    @vehicle.EngineNumber
+                </td>
+                <td>
+                    @vehicle.Number
+                </td>
+              
+        </tr>
+        }
+    </tbody>
+</table>
+</div>
