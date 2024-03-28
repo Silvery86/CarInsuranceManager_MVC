@@ -52,5 +52,51 @@ namespace CarInsuranceManagerWeb.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Vehicle? vehicle = _db.Vehicles.Find(id); // Find only work with primary key
+            // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            return View(vehicle);
+        }
+        [HttpPost]
+        public IActionResult Edit(Vehicle vehicle)
+        {
+            if (ModelState.IsValid)
+            {
+                // Check uniqueness for BodyNumber, EngineNumber, and Number
+                if (_db.Vehicles.Any(v => (v.Number == vehicle.Number || v.BodyNumber == vehicle.BodyNumber || v.EngineNumber == vehicle.EngineNumber) && v.Id != vehicle.Id))
+                {
+                    if (_db.Vehicles.Any(v => v.Number == vehicle.Number && v.Id != vehicle.Id))
+                    {
+                        ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
+                    }
+                    if (_db.Vehicles.Any(v => v.BodyNumber == vehicle.BodyNumber && v.Id != vehicle.Id))
+                    {
+                        ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
+                    }
+                    if (_db.Vehicles.Any(v => v.EngineNumber == vehicle.EngineNumber && v.Id != vehicle.Id))
+                    {
+                        ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
+                    }
+
+                    return View(vehicle); // Return the view to display validation errors
+                }
+                _db.Vehicles.Update(vehicle);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+
+        }
     }
 }
