@@ -624,10 +624,10 @@ span.text-black{
 }
 
 .navbar-brand img{
-    width: auto;
-    max-height: 25px;
+    width: 90px;
+    max-height: 70px;
     padding: 0px 0px;
-    margin-top: 12px;
+    margin-top: 0px;
 }
 
 .bg-dark {

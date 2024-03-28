@@ -6,17 +6,18 @@
         <div class="hero-text-inner">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
-                    <h3><span class="sub-heading-1"></span>Add New Vehicle</h3>
+                    <h3><span class="sub-heading-1"></span>Edit Vehicle</h3>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<hr/>
+<hr />
 <!-- Hero Image Ends here -->
 <div class="container">
 
     <form method="post">
+        <input asp-for="Id" hidden />
         <div class="border p-3 mt-4">
             <div class="mb-3 row pd-1">
                 <label asp-for="Name" class="p-0"></label>
@@ -60,7 +61,7 @@
             </div>
             <div class="row">
                 <div class="col-6 col-md-3">
-                    <button type="submit" class="btn btn-primary form-control">Add</button>
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
                 </div>
                 <div class="col-6 col-md-3">
                     <a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary border form-control">
@@ -74,6 +75,7 @@
 </div>
 @section Scripts {
     @{
-    <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial" />
     }
 }
+
