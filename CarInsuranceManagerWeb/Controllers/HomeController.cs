@@ -1,4 +1,4 @@
-using CarInsuranceManagerWeb.Models;
+using CarInsurance.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

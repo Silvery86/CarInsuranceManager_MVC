@@ -1,4 +1,4 @@
-using CarInsuranceManagerWeb.Data;
+using CarInsurance.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

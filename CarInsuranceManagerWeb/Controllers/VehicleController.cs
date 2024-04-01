@@ -1,5 +1,5 @@
-﻿using CarInsuranceManagerWeb.Data;
-using CarInsuranceManagerWeb.Models;
+﻿using CarInsurance.DataAccess.Data;
+using CarInsurance.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarInsuranceManagerWeb.Controllers
@@ -47,6 +47,7 @@ namespace CarInsuranceManagerWeb.Controllers
                     return View(vehicle); // Return the view to display validation errors
                 }
                 _db.Vehicles.Add(vehicle);
+                TempData["success"] = "Vehicle create successfully";
                 _db.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -93,8 +94,40 @@ namespace CarInsuranceManagerWeb.Controllers
                     return View(vehicle); // Return the view to display validation errors
                 }
                 _db.Vehicles.Update(vehicle);
+                TempData["success"] = "Vehicle edit successfully";
                 _db.SaveChanges();
             }
+            return RedirectToAction("Index");
+
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Vehicle? vehicle = _db.Vehicles.Find(id); // Find only work with primary key
+            // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            return View(vehicle);
+        }
+        [HttpPost, ActionName("Delete")]
+
+        public IActionResult DeletePOST(int? id)
+        {
+            Vehicle? vehicle = _db.Vehicles.Find(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            _db.Vehicles.Remove(vehicle);
+            _db.SaveChanges();
+            TempData["success"] = "Vehicle remove successfully";
             return RedirectToAction("Index");
 
         }

@@ -36,6 +36,9 @@
 
     <!-- Flaticon CSS -->
     <link rel="stylesheet" href="~/font/flaticon.css">
+
+    <!-- Toastr CDN -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
 </head>
 <body>
     <header>
@@ -91,7 +94,7 @@
 
         <!-- Nav Bar Ends here -->
     </header>
-
+    <partial name="_Notification" />
 
   
             @RenderBody()
