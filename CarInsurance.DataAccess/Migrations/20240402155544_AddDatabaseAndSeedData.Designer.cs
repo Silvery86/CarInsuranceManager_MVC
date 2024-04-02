@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarInsurance.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240323175204_AddVehicleTableToDB")]
-    partial class AddVehicleTableToDB
+    [Migration("20240402155544_AddDatabaseAndSeedData")]
+    partial class AddDatabaseAndSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace CarInsurance.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CarInsuranceManagerWeb.Models.Vehicle", b =>
+            modelBuilder.Entity("CarInsurance.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,11 +34,13 @@ namespace CarInsurance.DataAccess.Migrations
 
                     b.Property<string>("BodyNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("EngineNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -46,11 +48,13 @@ namespace CarInsurance.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("OwnerName")
                         .IsRequired()
@@ -66,6 +70,44 @@ namespace CarInsurance.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vehicles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BodyNumber = "ABC123",
+                            EngineNumber = "XYZ789",
+                            Model = "Ecosport",
+                            Name = "Ford",
+                            Number = "30A8686T",
+                            OwnerName = "Giang",
+                            Rate = 5,
+                            Version = "2015"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BodyNumber = "ABC456",
+                            EngineNumber = "XYZ123",
+                            Model = "Vios",
+                            Name = "Toyota",
+                            Number = "30A9999T",
+                            OwnerName = "Hoang",
+                            Rate = 8,
+                            Version = "2023"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BodyNumber = "ABC789",
+                            EngineNumber = "XYZ789",
+                            Model = "G63",
+                            Name = "MecedesBenz",
+                            Number = "30A6789T",
+                            OwnerName = "Nam",
+                            Rate = 15,
+                            Version = "2023"
+                        });
                 });
 #pragma warning restore 612, 618
         }

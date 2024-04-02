@@ -1,4 +1,4 @@
-﻿using CarInsurance.DataAccess.Data;
+﻿using CarInsurance.DataAccess.Repository.IRepository;
 using CarInsurance.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +6,15 @@ namespace CarInsuranceManagerWeb.Controllers
 {
     public class VehicleController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public VehicleController(ApplicationDbContext db)
+        private readonly IVehicleRepository _vehicleRepo;
+        public VehicleController(IVehicleRepository db)
         {
-            _db = db;
+            _vehicleRepo = db;
 
         }
         public IActionResult Index()
         {
-            List<Vehicle> vehicles = _db.Vehicles.ToList();
+            List<Vehicle> vehicles = _vehicleRepo.GetAll().ToList();
             return View(vehicles);
         }
         public IActionResult Create()
@@ -27,28 +27,28 @@ namespace CarInsuranceManagerWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Check uniqueness for BodyNumber, EngineNumber, and Number
-                if (_db.Vehicles.Any(v => v.Number == vehicle.Number ||
+                if (_vehicleRepo.GetAll().Any(v => v.Number == vehicle.Number ||
                                            v.BodyNumber == vehicle.BodyNumber ||
                                            v.EngineNumber == vehicle.EngineNumber))
                 {
-                    if (_db.Vehicles.Any(v => v.Number == vehicle.Number))
+                    if (_vehicleRepo.GetAll().Any(v => v.Number == vehicle.Number))
                     {
                         ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
                     }
-                    if (_db.Vehicles.Any(v => v.BodyNumber == vehicle.BodyNumber))
+                    if (_vehicleRepo.GetAll().Any(v => v.BodyNumber == vehicle.BodyNumber))
                     {
                         ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
                     }
-                    if (_db.Vehicles.Any(v => v.EngineNumber == vehicle.EngineNumber))
+                    if (_vehicleRepo.GetAll().Any(v => v.EngineNumber == vehicle.EngineNumber))
                     {
                         ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
                     }
 
                     return View(vehicle); // Return the view to display validation errors
                 }
-                _db.Vehicles.Add(vehicle);
+                _vehicleRepo.Add(vehicle);
                 TempData["success"] = "Vehicle create successfully";
-                _db.SaveChanges();
+                _vehicleRepo.Save();
             }
             return RedirectToAction("Index");
 
@@ -61,7 +61,7 @@ namespace CarInsuranceManagerWeb.Controllers
             {
                 return NotFound();
             }
-            Vehicle? vehicle = _db.Vehicles.Find(id); // Find only work with primary key
+            Vehicle? vehicle = _vehicleRepo.Get(u => u.Id == id); // Find only work with primary key
             // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
             //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
             if (vehicle == null)
@@ -75,30 +75,52 @@ namespace CarInsuranceManagerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check uniqueness for BodyNumber, EngineNumber, and Number
-                if (_db.Vehicles.Any(v => (v.Number == vehicle.Number || v.BodyNumber == vehicle.BodyNumber || v.EngineNumber == vehicle.EngineNumber) && v.Id != vehicle.Id))
+                var existingVehicle = _vehicleRepo.Get(u => u.Id == vehicle.Id);
+
+                // Check if the existing vehicle exists
+                if (existingVehicle == null)
                 {
-                    if (_db.Vehicles.Any(v => v.Number == vehicle.Number && v.Id != vehicle.Id))
+                    return NotFound(); // Or handle the scenario as appropriate
+                }
+
+                // Check uniqueness for BodyNumber, EngineNumber, and Number
+                if (_vehicleRepo.GetAll().Any(v => (v.Number == vehicle.Number || v.BodyNumber == vehicle.BodyNumber || v.EngineNumber == vehicle.EngineNumber) && v.Id != vehicle.Id))
+                {
+                    if (_vehicleRepo.GetAll().Any(v => v.Number == vehicle.Number && v.Id != vehicle.Id))
                     {
                         ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
                     }
-                    if (_db.Vehicles.Any(v => v.BodyNumber == vehicle.BodyNumber && v.Id != vehicle.Id))
+                    if (_vehicleRepo.GetAll().Any(v => v.BodyNumber == vehicle.BodyNumber && v.Id != vehicle.Id))
                     {
                         ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
                     }
-                    if (_db.Vehicles.Any(v => v.EngineNumber == vehicle.EngineNumber && v.Id != vehicle.Id))
+                    if (_vehicleRepo.GetAll().Any(v => v.EngineNumber == vehicle.EngineNumber && v.Id != vehicle.Id))
                     {
                         ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
                     }
 
                     return View(vehicle); // Return the view to display validation errors
                 }
-                _db.Vehicles.Update(vehicle);
-                TempData["success"] = "Vehicle edit successfully";
-                _db.SaveChanges();
+
+                // Detach the existing entity from the context
+                _vehicleRepo.Detach(existingVehicle);
+
+                // Update the existing entity with the values of the submitted entity
+                existingVehicle.Name = vehicle.Name;
+                existingVehicle.OwnerName = vehicle.OwnerName;
+                existingVehicle.Model = vehicle.Model;
+                existingVehicle.Version = vehicle.Version;
+                existingVehicle.Rate = vehicle.Rate;
+                existingVehicle.BodyNumber = vehicle.BodyNumber;
+                existingVehicle.EngineNumber = vehicle.EngineNumber;
+                existingVehicle.Number = vehicle.Number;
+                // Update other properties as needed
+
+                _vehicleRepo.Update(existingVehicle);
+                TempData["success"] = "Vehicle edited successfully";
+                _vehicleRepo.Save();
             }
             return RedirectToAction("Index");
-
         }
 
         public IActionResult Delete(int? id)
@@ -107,7 +129,7 @@ namespace CarInsuranceManagerWeb.Controllers
             {
                 return NotFound();
             }
-            Vehicle? vehicle = _db.Vehicles.Find(id); // Find only work with primary key
+            Vehicle? vehicle = _vehicleRepo.Get(u => u.Id == id); // Find only work with primary key
             // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
             //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
             if (vehicle == null)
@@ -120,13 +142,13 @@ namespace CarInsuranceManagerWeb.Controllers
 
         public IActionResult DeletePOST(int? id)
         {
-            Vehicle? vehicle = _db.Vehicles.Find(id);
+            Vehicle? vehicle = _vehicleRepo.Get(u => u.Id == id);
             if (vehicle == null)
             {
                 return NotFound();
             }
-            _db.Vehicles.Remove(vehicle);
-            _db.SaveChanges();
+            _vehicleRepo.Remove(vehicle);
+            _vehicleRepo.Save();
             TempData["success"] = "Vehicle remove successfully";
             return RedirectToAction("Index");
 

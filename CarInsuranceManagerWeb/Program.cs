@@ -1,4 +1,6 @@
 using CarInsurance.DataAccess.Data;
+using CarInsurance.DataAccess.Repository;
+using CarInsurance.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
-
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 
 var app = builder.Build();
