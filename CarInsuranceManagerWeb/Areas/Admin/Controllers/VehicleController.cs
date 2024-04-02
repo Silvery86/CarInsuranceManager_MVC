@@ -2,8 +2,9 @@
 using CarInsurance.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarInsuranceManagerWeb.Controllers
+namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class VehicleController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
