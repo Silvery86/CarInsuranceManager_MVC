@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CarInsurance.Models
 {
+
     public class Vehicle
     {
         [Key]
@@ -20,9 +21,15 @@ namespace CarInsurance.Models
         [Required]
         [DisplayName("Vehicle Version")]
         public required string Version { get; set; }
+
+        [Required]
+        [DisplayName("Vehicle Value")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
+        public decimal VehicleValue { get; set; }
         [Required]
         [Range(1, 100)]
         [DisplayName("Vehicle Rate")]
+
         public int Rate { get; set; }
         [Required]
         [MaxLength(25)]

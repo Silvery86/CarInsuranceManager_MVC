@@ -25,34 +25,42 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Vehicle vehicle)
         {
+            // Check if VehicleValue is greater than zero
+            if (vehicle.VehicleValue <= 0)
+            {
+                ModelState.AddModelError(nameof(vehicle.VehicleValue), "Vehicle value must be greater than zero.");
+            }
+
             if (ModelState.IsValid)
             {
                 // Check uniqueness for BodyNumber, EngineNumber, and Number
-                if (_unitOfWork.Vehicle.GetAll().Any(v => v.Number == vehicle.Number ||
-                                           v.BodyNumber == vehicle.BodyNumber ||
-                                           v.EngineNumber == vehicle.EngineNumber))
+                if (_unitOfWork.Vehicle.GetAll().Any(v => v.Number == vehicle.Number))
                 {
-                    if (_unitOfWork.Vehicle.GetAll().Any(v => v.Number == vehicle.Number))
-                    {
-                        ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
-                    }
-                    if (_unitOfWork.Vehicle.GetAll().Any(v => v.BodyNumber == vehicle.BodyNumber))
-                    {
-                        ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
-                    }
-                    if (_unitOfWork.Vehicle.GetAll().Any(v => v.EngineNumber == vehicle.EngineNumber))
-                    {
-                        ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
-                    }
+                    ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
+                }
+                if (_unitOfWork.Vehicle.GetAll().Any(v => v.BodyNumber == vehicle.BodyNumber))
+                {
+                    ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
+                }
+                if (_unitOfWork.Vehicle.GetAll().Any(v => v.EngineNumber == vehicle.EngineNumber))
+                {
+                    ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
+                }
 
+                // Check if there are any model errors after checking uniqueness and VehicleValue
+                if (ModelState.ErrorCount > 0)
+                {
                     return View(vehicle); // Return the view to display validation errors
                 }
-                _unitOfWork.Vehicle.Add(vehicle);
-                TempData["success"] = "Vehicle create successfully";
-                _unitOfWork.Save();
-            }
-            return RedirectToAction("Index");
 
+                _unitOfWork.Vehicle.Add(vehicle);
+                TempData["success"] = "Vehicle created successfully";
+                _unitOfWork.Save();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(vehicle); // Return the view if ModelState is not valid
         }
 
 
@@ -74,6 +82,11 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Vehicle vehicle)
         {
+            // Check if VehicleValue is greater than zero
+            if (vehicle.VehicleValue <= 0)
+            {
+                ModelState.AddModelError(nameof(vehicle.VehicleValue), "Vehicle value must be greater than zero.");
+            }
             if (ModelState.IsValid)
             {
                 var existingVehicle = _unitOfWork.Vehicle.Get(u => u.Id == vehicle.Id);
@@ -154,5 +167,6 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+
     }
 }

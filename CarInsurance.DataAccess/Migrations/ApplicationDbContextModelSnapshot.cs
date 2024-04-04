@@ -60,6 +60,9 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("VehicleValue")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Version")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +81,8 @@ namespace CarInsurance.DataAccess.Migrations
                             Name = "Ford",
                             Number = "30A8686T",
                             OwnerName = "Giang",
-                            Rate = 5,
+                            Rate = 50,
+                            VehicleValue = 20000m,
                             Version = "2015"
                         },
                         new
@@ -90,7 +94,8 @@ namespace CarInsurance.DataAccess.Migrations
                             Name = "Toyota",
                             Number = "30A9999T",
                             OwnerName = "Hoang",
-                            Rate = 8,
+                            Rate = 100,
+                            VehicleValue = 50000m,
                             Version = "2023"
                         },
                         new
@@ -102,7 +107,8 @@ namespace CarInsurance.DataAccess.Migrations
                             Name = "MecedesBenz",
                             Number = "30A6789T",
                             OwnerName = "Nam",
-                            Rate = 15,
+                            Rate = 70,
+                            VehicleValue = 100000m,
                             Version = "2023"
                         });
                 });

@@ -7,7 +7,7 @@
 namespace CarInsurance.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDatabaseAndSeedData : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,7 @@ namespace CarInsurance.DataAccess.Migrations
                     OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Version = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Rate = table.Column<int>(type: "int", nullable: false),
                     BodyNumber = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     EngineNumber = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
@@ -34,12 +35,12 @@ namespace CarInsurance.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "BodyNumber", "EngineNumber", "Model", "Name", "Number", "OwnerName", "Rate", "Version" },
+                columns: new[] { "Id", "BodyNumber", "EngineNumber", "Model", "Name", "Number", "OwnerName", "Rate", "VehicleValue", "Version" },
                 values: new object[,]
                 {
-                    { 1, "ABC123", "XYZ789", "Ecosport", "Ford", "30A8686T", "Giang", 5, "2015" },
-                    { 2, "ABC456", "XYZ123", "Vios", "Toyota", "30A9999T", "Hoang", 8, "2023" },
-                    { 3, "ABC789", "XYZ789", "G63", "MecedesBenz", "30A6789T", "Nam", 15, "2023" }
+                    { 1, "ABC123", "XYZ789", "Ecosport", "Ford", "30A8686T", "Giang", 50, 20000m, "2015" },
+                    { 2, "ABC456", "XYZ123", "Vios", "Toyota", "30A9999T", "Hoang", 100, 50000m, "2023" },
+                    { 3, "ABC789", "XYZ789", "G63", "MecedesBenz", "30A6789T", "Nam", 70, 100000m, "2023" }
                 });
         }
 

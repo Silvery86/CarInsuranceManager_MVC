@@ -1,0 +1,60 @@
+﻿<script>
+    // Function to populate names
+    function populateNames() {
+        var nameDropdown = document.getElementById("nameDropdown");
+
+        // Clear existing options
+        nameDropdown.innerHTML = "<option value=''>Select Name</option>";
+
+        // Define available names
+        var names = ["Toyota", "Honda", "Ford"]; // Add more names as needed
+
+        // Populate name dropdown
+        names.forEach(function (name) {
+            var option = document.createElement("option");
+            option.text = name;
+            option.value = name;
+            nameDropdown.appendChild(option);
+        });
+    }
+
+    // Event listener to trigger name population when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+        populateNames();
+    });
+</script>
+<script>
+    // Function to populate models based on selected name
+    function populateModels() {
+        var nameDropdown = document.getElementById("nameDropdown");
+        var modelDropdown = document.getElementById("modelDropdown");
+
+        // Clear existing options
+        modelDropdown.innerHTML = "<option value=''>Select Model</option>";
+
+        // Define models based on selected name
+        var models = {
+            "Toyota": ["Corolla", "Camry", "RAV4"],
+            "Honda": ["Civic", "Accord", "CR-V"],
+            "Ford": ["Focus", "Fusion", "Escape"],
+            // Add more name-model mappings as needed
+        };
+
+        // Populate models dropdown based on selected name
+        var selectedName = nameDropdown.value;
+        if (selectedName && models[selectedName]) {
+            models[selectedName].forEach(function (model) {
+                var option = document.createElement("option");
+                option.text = model;
+                option.value = model;
+                modelDropdown.appendChild(option);
+            });
+        }
+    }
+
+    // Event listener to trigger model population when name is selected
+    document.getElementById("nameDropdown").addEventListener("change", populateModels);
+
+    // Initial population when the page loads
+    populateModels();
+</script>
