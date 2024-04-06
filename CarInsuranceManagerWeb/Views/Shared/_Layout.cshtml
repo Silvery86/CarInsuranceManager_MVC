@@ -73,22 +73,24 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Comming Soon
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Car List</a> 
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Policy" asp-action="Index">Policy List</a>
-                                </div>
-                                
-                            </li>
-                            
+                            @if (User.IsInRole(SD.Role_Admin))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Comming Soon
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdown">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Car List</a> 
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Policy" asp-action="Index">Policy List</a>
+                                    </div>
+
+                                </li>
+                            }
                         </ul>
-                        <form class="form-inline my-2 my-lg-0">
-                            <button class="btn-link my-2 my-sm-0 ml-15" type="submit">Login</button>
-                        </form>
+                        <div class=" my-2 my-lg-0">
+                            <partial name="_LoginPartial" />
+                        </div>
                     </div>
                 </div>
             </div>

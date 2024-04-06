@@ -1,10 +1,13 @@
 ﻿using CarInsurance.DataAccess.Repository.IRepository;
 using CarInsurance.Models;
+using CarInsurance.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class PolicyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

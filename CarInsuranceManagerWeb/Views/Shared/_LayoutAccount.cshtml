@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CarInsurance Dashboard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CarInsuranceManagerWeb.styles.css" asp-append-version="true" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap-grid.css">
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap-reboot.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+    <!-- Toastr CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link href="~/admin/layouts/horizontal-light-menu/css/light/loader.css" rel="stylesheet" type="text/css" />
+    <link href="~/admin/layouts/horizontal-light-menu/css/dark/loader.css" rel="stylesheet" type="text/css" />
+    <script src="~/admin/layouts/horizontal-light-menu/loader.js"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="~/admin/src/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/admin/layouts/horizontal-light-menu/css/light/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="~/admin/src/assets/css/light/authentication/auth-cover.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/admin/layouts/horizontal-light-menu/css/dark/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="~/admin/src/assets/css/dark/authentication/auth-cover.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+</head>
+<body>
+    
+    <partial name="_Notification" />
+
+  
+            @RenderBody()
+   
+
+    
+        <!-- Footer section starts here -->
+ 
+     
+   
+     <!-- Footer section ends here -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="~/admin/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
