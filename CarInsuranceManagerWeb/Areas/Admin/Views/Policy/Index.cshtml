@@ -1,0 +1,88 @@
+﻿@model List<Policy>
+
+<!-- Hero Image Starts here -->
+<div class="hero-image-small hero-small-car">
+    <div class="container">
+        <div class="hero-text-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
+                    <h3><span class="sub-heading-1"></span>Policy List</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero Image Ends here -->
+<div class="container">
+    <div class="row mt-3 mb-3">
+    <div class="col-6">
+        <a class="btn btn-primary" asp-controller="Policy" asp-action="Create">
+            <i class="bi bi-plus-circle"></i> Add New Policy
+        </a>
+    </div>
+    </div>
+</div>
+<div class="container">
+  
+<table class="table table-bordered table-striped">
+    <thead>
+
+        <tr>
+            <th>
+                Policy Name
+            </th>
+            <th>
+                    Policy Warranty
+            </th>
+            <th>
+                    Policy Base Cost
+            </th>
+            <th>
+                    Policy Annual Cost
+            </th>
+            <th>
+                    Description
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Policy in Model)
+        {
+            
+        <tr>
+            <td>
+                @Policy.Name
+            </td>
+                <td>
+                    @Policy.Warranty
+                </td>
+                <td>
+                    @Policy.BaseCost
+                </td>
+                <td>
+                    @Policy.AnnualCost
+                </td>
+                    <td>
+                        @Policy.Description
+                    </td>
+               
+                <td>
+                    <div class="w-50 btn-group" role="group">
+                        <a asp-controller="Policy" asp-action="Edit" asp-route-id="@Policy.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                            <a asp-controller="Policy" asp-action="Delete" asp-route-id="@Policy.Id" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash3"></i> Delete
+                            </a>
+
+                    </div>
+                </td>
+              
+        </tr>
+        }
+    </tbody>
+</table>
+</div>

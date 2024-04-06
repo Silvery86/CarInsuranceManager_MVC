@@ -7,11 +7,28 @@
 namespace CarInsurance.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabase : Migration
+    public partial class initDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Policies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Warranty = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    BaseCost = table.Column<double>(type: "float", nullable: false),
+                    AnnualCost = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Policies", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
@@ -34,6 +51,16 @@ namespace CarInsurance.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Policies",
+                columns: new[] { "Id", "AnnualCost", "BaseCost", "Description", "Name", "Warranty" },
+                values: new object[,]
+                {
+                    { 1, 0.25, 70.0, "Basic Insurance Policy", "Basic", "Damage third-party vehicle,Own Damage Theft" },
+                    { 2, 0.27000000000000002, 90.0, "Standard Insurance Policy", "Standard", "Damage third-party vehicle,Own Damage Theft,Damage due to fire,Naturaly damage" },
+                    { 3, 0.28999999999999998, 120.0, "Extended Insurance Policy", "Extended", "Damage third-party vehicle,Own Damage Theft,Damage due to fire,Naturaly damage,Personal Accident cover" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Vehicles",
                 columns: new[] { "Id", "BodyNumber", "EngineNumber", "Model", "Name", "Number", "OwnerName", "Rate", "VehicleValue", "Version" },
                 values: new object[,]
@@ -47,6 +74,9 @@ namespace CarInsurance.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Policies");
+
             migrationBuilder.DropTable(
                 name: "Vehicles");
         }
