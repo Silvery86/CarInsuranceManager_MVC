@@ -19,5 +19,10 @@ namespace CarInsurance.DataAccess.Repository
         {
             _db.SaveChanges();
         }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _db.SaveChangesAsync();
+        }
     }
 }

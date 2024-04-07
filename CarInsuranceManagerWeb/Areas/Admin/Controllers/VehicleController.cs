@@ -2,6 +2,7 @@
 using CarInsurance.Models;
 using CarInsurance.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
@@ -10,42 +11,84 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
     [Authorize(Roles = SD.Role_Admin)]
     public class VehicleController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
-        public VehicleController(IUnitOfWork unitOfWork)
+        public VehicleController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork)
         {
+            _userManager = userManager;
             _unitOfWork = unitOfWork;
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            // Get all vehicles
             List<Vehicle> vehicles = _unitOfWork.Vehicle.GetAll().ToList();
+
+            // Iterate over each vehicle to fetch associated UserName
+            foreach (var vehicle in vehicles)
+            {
+                // Find the associated IdentityUser using UserManager
+                var user = await _userManager.FindByIdAsync(vehicle.UserId);
+
+                // If user is found, set the UserName in the Vehicle model
+                if (user != null)
+                {
+                    // Assuming you have a property named UserName in the Vehicle model
+                    vehicle.UserName = user.UserName;
+                }
+                else
+                {
+                    // Handle case where user is not found (optional)
+                    // You can set a default value for UserName or handle it as needed
+                    vehicle.UserName = "Unknown"; // Or any default value
+                }
+            }
+
             return View(vehicles);
         }
         public IActionResult Create()
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult Create(Vehicle vehicle)
+
+        public HttpContext GetHttpContext()
         {
+            return HttpContext;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(Vehicle vehicle)
+        {
+            ModelState.Clear();
             // Check if VehicleValue is greater than zero
             if (vehicle.VehicleValue <= 0)
             {
                 ModelState.AddModelError(nameof(vehicle.VehicleValue), "Vehicle value must be greater than zero.");
             }
 
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (currentUser == null)
+            {
+                // Handle if user is not authenticated
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Assign the current user directly to the IdentityUser navigation property
+            vehicle.UserId = currentUser.Id;
+
             if (ModelState.IsValid)
             {
-                // Check uniqueness for BodyNumber, EngineNumber, and Number
-                if (_unitOfWork.Vehicle.GetAll().Any(v => v.Number == vehicle.Number))
+                // Check for uniqueness of Number, BodyNumber, and EngineNumber
+                var existingVehicles = _unitOfWork.Vehicle.GetAll();
+                if (existingVehicles.Any(v => v.Number == vehicle.Number))
                 {
                     ModelState.AddModelError(nameof(vehicle.Number), "A vehicle with this number already exists.");
                 }
-                if (_unitOfWork.Vehicle.GetAll().Any(v => v.BodyNumber == vehicle.BodyNumber))
+                if (existingVehicles.Any(v => v.BodyNumber == vehicle.BodyNumber))
                 {
                     ModelState.AddModelError(nameof(vehicle.BodyNumber), "A vehicle with this body number already exists.");
                 }
-                if (_unitOfWork.Vehicle.GetAll().Any(v => v.EngineNumber == vehicle.EngineNumber))
+                if (existingVehicles.Any(v => v.EngineNumber == vehicle.EngineNumber))
                 {
                     ModelState.AddModelError(nameof(vehicle.EngineNumber), "A vehicle with this engine number already exists.");
                 }
@@ -56,14 +99,16 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
                     return View(vehicle); // Return the view to display validation errors
                 }
 
+                // Add the vehicle to the context and save changes
                 _unitOfWork.Vehicle.Add(vehicle);
                 TempData["success"] = "Vehicle created successfully";
-                _unitOfWork.Save();
+                await _unitOfWork.SaveChangesAsync();
 
                 return RedirectToAction("Index");
             }
 
-            return View(vehicle); // Return the view if ModelState is not valid
+            // Return the view to display validation errors
+            return View(vehicle);
         }
 
 

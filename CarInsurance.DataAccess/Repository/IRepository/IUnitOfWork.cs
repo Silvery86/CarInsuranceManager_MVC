@@ -5,5 +5,6 @@
         IVehicleRepository Vehicle { get; }
         IPolicyRepository Policy { get; }
         void Save();
+        Task<int> SaveChangesAsync();
     }
 }

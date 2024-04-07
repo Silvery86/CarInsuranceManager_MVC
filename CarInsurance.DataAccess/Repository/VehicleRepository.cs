@@ -29,5 +29,10 @@ namespace CarInsurance.DataAccess.Repository
                 entry.State = EntityState.Detached;
             }
         }
+
+        public IEnumerable<Vehicle> GetAllByUserId(string userId)
+        {
+            return _db.Vehicles.Where(v => v.UserId == userId).ToList();
+        }
     }
 }

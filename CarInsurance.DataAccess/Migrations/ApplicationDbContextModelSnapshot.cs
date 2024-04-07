@@ -124,6 +124,10 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal>("VehicleValue")
                         .HasColumnType("decimal(18,2)");
 
@@ -133,48 +137,9 @@ namespace CarInsurance.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BodyNumber = "ABC123",
-                            EngineNumber = "XYZ789",
-                            Model = "Ecosport",
-                            Name = "Ford",
-                            Number = "30A8686T",
-                            OwnerName = "Giang",
-                            Rate = 50,
-                            VehicleValue = 20000m,
-                            Version = "2015"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BodyNumber = "ABC456",
-                            EngineNumber = "XYZ123",
-                            Model = "Vios",
-                            Name = "Toyota",
-                            Number = "30A9999T",
-                            OwnerName = "Hoang",
-                            Rate = 100,
-                            VehicleValue = 50000m,
-                            Version = "2023"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BodyNumber = "ABC789",
-                            EngineNumber = "XYZ789",
-                            Model = "G63",
-                            Name = "MecedesBenz",
-                            Number = "30A6789T",
-                            OwnerName = "Nam",
-                            Rate = 70,
-                            VehicleValue = 100000m,
-                            Version = "2023"
-                        });
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -331,12 +296,10 @@ namespace CarInsurance.DataAccess.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -373,12 +336,10 @@ namespace CarInsurance.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -409,6 +370,17 @@ namespace CarInsurance.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("CarInsurance.Models.Vehicle", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

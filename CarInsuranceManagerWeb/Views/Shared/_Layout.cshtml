@@ -73,24 +73,32 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
-                            @if (User.IsInRole(SD.Role_Admin))
+                            @if (User.IsInRole(SD.Role_Customer))
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Comming Soon
+                                        Options
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdown">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Car List</a> 
+                                        <a class="dropdown-item" asp-area="Customer" asp-controller="Vehicle" asp-action="Index">Car List</a> 
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="Policy" asp-action="Index">Policy List</a>
                                     </div>
 
                                 </li>
                             }
                         </ul>
-                        <div class=" my-2 my-lg-0">
-                            <partial name="_LoginPartial" />
-                        </div>
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <div class=" my-2 my-lg-0">
+                                <partial name="_LoginPartialAdmin" />
+                            </div>
+                        }else
+                        {
+                            <div class=" my-2 my-lg-0">
+                                <partial name="_LoginPartial" />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
