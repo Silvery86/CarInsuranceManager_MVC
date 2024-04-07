@@ -15,10 +15,11 @@ namespace CarInsurance.DataAccess.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Policy> Policies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Estimate> Estimates { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
 
 
             modelBuilder.Entity<Policy>().HasData(

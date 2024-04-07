@@ -5,34 +5,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarInsurance.DataAccess.Repository
 {
-    public class VehicleRepository : Repository<Vehicle>, IVehicleRepository
+    public class EstimateRepository : Repository<Estimate>, IEstimateRepository
     {
         private ApplicationDbContext _db;
-        public VehicleRepository(ApplicationDbContext db) : base(db)
+        public EstimateRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
 
 
 
-        public void Update(Vehicle vehicle)
+        public void Update(Estimate obj)
         {
-            _db.Vehicles.Update(vehicle);
+            _db.Estimates.Update(obj);
         }
 
 
-        public void Detach(object vehicle)
+        public void Detach(object obj)
         {
-            var entry = _db.Entry(vehicle);
+            var entry = _db.Entry(obj);
             if (entry.State != EntityState.Detached)
             {
                 entry.State = EntityState.Detached;
             }
         }
 
-        public IEnumerable<Vehicle> GetAllByUserId(string userId)
+        public IEnumerable<Estimate> GetAllByUserId(string userId)
         {
-            return _db.Vehicles.Where(v => v.UserId == userId).ToList();
+            return _db.Estimates.Where(v => v.CustomerId == userId).ToList();
         }
 
 

@@ -7,5 +7,6 @@ namespace CarInsurance.DataAccess.Repository.IRepository
         void Update(Vehicle obj);
         void Detach(object existingVehicle);
         IEnumerable<Vehicle> GetAllByUserId(string userId);
+
     }
 }
