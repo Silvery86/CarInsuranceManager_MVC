@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarInsurance.Models
 {
-    public class Estimate
+    public class Record
     {
         [Key]
         public int Id { get; set; }
@@ -16,19 +16,34 @@ namespace CarInsurance.Models
         [ForeignKey("CustomerId")]
         public ApplicationUser? ApplicationUser { get; set; }
 
-
-        [DisplayName("Estimate Number")]
-        public int EstimateNumber { get; set; }
-
         [Required]
         [MaxLength(50)]
         [DisplayName("Customer Name")]
         public required string CustomerName { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        [DisplayName("Customer Address")]
+        public required string CustomerAddress { get; set; }
+
+        [Required]
         [DisplayName("Customer Phone Number")]
         [Phone]
         public required string CustomerPhoneNumber { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("Vehicle Policy Type")]
+        public required string VehiclePolicyType { get; set; }
+
+
+        [Required]
+        [DisplayName("Policy Date")]
+        public double PolicyDate { get; set; }
+
+        [Required]
+        [DisplayName("Policy Duration")]
+        public double PolicyDuration { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -64,35 +79,15 @@ namespace CarInsurance.Models
         public required string VehicleWarranty { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        [DisplayName("Vehicle Policy Type")]
-        public required string VehiclePolicyType { get; set; }
-
-        // Foreign key relationship to Policy model
-        [Required]
-        [DisplayName("Policy ID")]
-        public int PolicyId { get; set; }
-
-        [ForeignKey("PolicyId")]
-        public Policy Policy { get; set; }
+        [MaxLength(200)]
+        [DisplayName("Customer Add Prove")]
+        public required string CustomerAddProve { get; set; }
 
         [Required]
-        [DisplayName("Vehicle ID")]
-        public int VehicleId { get; set; }
+        [DisplayName("Insurance Cost")]
+        public double InsuranceCost { get; set; }
 
 
-
-        [Required]
-        [DisplayName("Policy Base Cost")]
-        public double PolicyBaseCost { get; set; }
-
-        [Required]
-        [DisplayName("Policy Annual Cost")]
-        public double PolicyAnnualCost { get; set; }
-
-        [Required]
-        [DisplayName("Estimate Cost")]
-        public double EstimateCost { get; set; }
     }
 
 }

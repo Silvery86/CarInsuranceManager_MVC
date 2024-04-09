@@ -14,114 +14,168 @@
 <hr/>
 <!-- Hero Image Ends here -->
 <form method="post">
-    <div class="border p-3 mt-4">
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.CustomerName" class="p-0"></label>
-            <input asp-for="Estimate.CustomerName" class="form-control" />
-            <span asp-validation-for="Estimate.CustomerName" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.CustomerPhoneNumber" class="p-0"></label>
-            <input asp-for="Estimate.CustomerPhoneNumber" class="form-control" />
-            <span asp-validation-for="Estimate.CustomerPhoneNumber" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleNumber" class="p-0"></label>
-            <select asp-for="@Model.Estimate.VehicleNumber" asp-items="@Model.VehicleList" id="vehicleDropDown" class="form-select">
-                <option value="" disabled selected>-- Select Vehicle --</option>
-            </select>
-            <span asp-validation-for="Estimate.VehicleNumber" class="text-danger"></span>
-        </div>
-        <input asp-for="Estimate.VehicleId" hidden />
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleName" class="p-0"></label>
-            <input asp-for="Estimate.VehicleName" class="form-control" disabled />
-            <span asp-validation-for="Estimate.VehicleName" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleModel" class="p-0"></label>
-            <input asp-for="Estimate.VehicleModel" class="form-control" disabled/>
-            <span asp-validation-for="Estimate.VehicleModel" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleVersion" class="p-0"></label>
-            <input asp-for="Estimate.VehicleVersion" class="form-control" disabled />
-            <span asp-validation-for="Estimate.VehicleVersion" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleValue" class="p-0"></label>
-            <input asp-for="Estimate.VehicleValue" class="form-control" disabled />
-            <span asp-validation-for="Estimate.VehicleValue" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleRate" class="p-0"></label>
-            <input asp-for="Estimate.VehicleRate" class="form-control" disabled />
-            <span asp-validation-for="Estimate.VehicleRate" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehiclePolicyType" class="p-0"></label>
-            <select asp-for="@Model.Estimate.VehiclePolicyType" asp-items="@Model.PolicyList" id="policyDropDown" class="form-select">
-                <option disabled selected>--Select Policy--</option>
-            </select>
-            <span asp-validation-for="Estimate.VehiclePolicyType" class="text-danger"></span>
-        </div>
+    <!-- Form section start here -->
+    <div class="section-larger">
+        <div class="container">
 
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.VehicleWarranty" class="p-0"></label>
-            <textarea asp-for="Estimate.VehicleWarranty" class="form-control" disabled></textarea>
-            <span asp-validation-for="Estimate.VehicleWarranty" class="text-danger"></span>
+            <div class="insure-text bg-color-2 p-4">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
+                        <h4 class="highlight">
+                            <strong class="text-yellow">Upto 80% Off*</strong><br> on Comprehensive Car Insurance
+                        </h4>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum quo ullam id incidunt accusamus numquam.</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <div class="img-container-sml text-right">
+                            <img src="images/about_step_1.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <div class="insure-form">
+                        <h5>Need some more details</h5>
+                        
+                            <h6>Personal Info</h6>
+                            <div class="form-group">
+                                <label asp-for="Estimate.CustomerName" class="p-0"></label>
+                                <input asp-for="Estimate.CustomerName" class="form-control" />
+                                <span asp-validation-for="Estimate.CustomerName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Estimate.CustomerPhoneNumber" class="p-0"></label>
+                                <input asp-for="Estimate.CustomerPhoneNumber" class="form-control" />
+                                <span asp-validation-for="Estimate.CustomerPhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <h6>Car Info</h6>
+                            <div class="form-group form-row">
+                                <div class="col-lg-7">
+                                <label asp-for="Estimate.VehicleNumber" class="p-0"></label>
+                                <select asp-for="@Model.Estimate.VehicleNumber" asp-items="@Model.VehicleList" id="vehicleDropDown" class="form-control">
+                                    <option value="" disabled selected>-- Select Vehicle --</option>
+                                </select>
+                                <span asp-validation-for="Estimate.VehicleNumber" class="text-danger"></span>
+                                </div>
+                                 
+                                <div class="col-lg-5">
+                                    <label asp-for="Estimate.VehicleName" class="p-0"></label>
+                                    <input asp-for="Estimate.VehicleName" class="form-control" disabled />
+                                    <span asp-validation-for="Estimate.VehicleName" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group form-row">
+                                <div class="col-lg-7">
+                                    <label asp-for="Estimate.VehicleModel" class="p-0"></label>
+                                    <input asp-for="Estimate.VehicleModel" class="form-control" disabled />
+                                    <span asp-validation-for="Estimate.VehicleModel" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-5">
+                                    <label asp-for="Estimate.VehicleVersion" class="p-0"></label>
+                                    <input asp-for="Estimate.VehicleVersion" class="form-control" disabled />
+                                    <span asp-validation-for="Estimate.VehicleVersion" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        <div class="form-group form-row">
+                            <div class="col-lg-7">
+                                <label asp-for="Estimate.VehicleValue" class="p-0"></label>
+                                <input asp-for="Estimate.VehicleValue" class="form-control" disabled />
+                                <span asp-validation-for="Estimate.VehicleValue" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <label asp-for="Estimate.VehicleRate" class="p-0"></label>
+                                <input asp-for="Estimate.VehicleRate" class="form-control" disabled />
+                                <span asp-validation-for="Estimate.VehicleRate" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-sm-12 offset-md-1 offset-lg-2">
+                    <div class="plan">
+                        <ul>
+                            <label></label>
+                            <div class="mb-3 row pd-1 col-12 w-100">
+                                <label asp-for="Estimate.VehiclePolicyType" class="p-0"></label>
+                                <select asp-for="@Model.Estimate.VehiclePolicyType" asp-items="@Model.PolicyList" id="policyDropDown" class="form-select">
+                                    <option disabled selected>--Select Policy--</option>
+                                </select>
+                                <span asp-validation-for="Estimate.VehiclePolicyType" class="text-danger"></span>
+                            </div>
+                            <input asp-for="Estimate.PolicyId" hidden />
+                            <li>
+                              
+                                <h5>Base Cost: <input asp-for="Estimate.PolicyBaseCost"  disabled /> $<span>/ Year</span></h5>
+                                <h5>Annual Cost: <input asp-for="Estimate.PolicyAnnualCost" disabled /> %<span>/ Year</span></h5>
+                                <p><strong>Included:</strong> Accident | Theft | Fire </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-ter-round mt-4 mb-4" id="estimateCostBtn">Estimate Your Insurance</button>
+                    <div class="plan">
+                        <ul>
+                            <li>
+                                <h5>Estimate Cost: <input disabled id="estimateCost" /> $<span>/ Year</span></h5>
+                            </li>
+                          
+                        </ul>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-prim-round mt-4">Proceed</button>
+                 
+
+                    <div class="send-quotes bg-color-2">
+                        <h6>Send me the quote</h6>
+                        <p>We will remind you before your current policy expire.</p>
+                        <div class="quote-text">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <span class="flaticon-email"></span>
+                                        <p>Email</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="flaticon-mobile-phone"></span>
+                                        <p>SMS</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="flaticon-whatsapp"></span>
+                                        <p>WhatsApp</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-        <input asp-for="Estimate.PolicyId" hidden />
-       
-     
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.PolicyBaseCost" class="p-0"></label>
-            <input asp-for="Estimate.PolicyBaseCost" class="form-control" disabled />
-            <span asp-validation-for="Estimate.PolicyBaseCost" class="text-danger"></span>
-        </div>
-       
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.PolicyAnnualCost" class="p-0"></label>
-            <input asp-for="Estimate.PolicyAnnualCost" class="form-control" disabled />
-            <span asp-validation-for="Estimate.PolicyAnnualCost" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row pd-1">
-            <label asp-for="Estimate.EstimateCost" class="p-0"></label>
-            <input asp-for="Estimate.EstimateCost" class="form-control" disabled id="estimateCost" />
-            <span asp-validation-for="Estimate.EstimateCost" class="text-danger"></span>
-        </div>
-       
     </div>
+    <!-- Form section Ends here -->
 </form>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        // When the vehicle dropdown selection changes
-        $("#vehicleDropDown").change(function () {
-            // Get the selected vehicle number
-            var vehicleId = $(this).val();
-
-            // Send an AJAX request to fetch the corresponding VehicleName
-            $.ajax({
-                url: "/Customer/Estimate/GetVehicle",
-                method: "POST",
-                data: { vehicleId: vehicleId },
-                success: function (data) {
-         
-                    // Update the VehicleName input field with the received data
-                    $("input[name='Estimate.VehicleName']").val(data["name"]);
-                    $("input[name='Estimate.VehicleId']").val(data["id"]);
-                    $("input[name='Estimate.VehicleModel']").val(data["model"]);
-                    $("input[name='Estimate.VehicleVersion']").val(data["version"]);
-                    $("input[name='Estimate.VehicleValue']").val(data["vehicleValue"]);
-                    $("input[name='Estimate.VehicleRate']").val(data["rate"]);
-                },
-                error: function (xhr, status, error) {
-                    // Handle error if any
-                    console.log(error);
-                }
-            });
-        });
         // When the vehicle dropdown selection changes
         $("#policyDropDown").change(function () {
             // Get the selected vehicle number
@@ -146,65 +200,36 @@
                 }
             });
         });
-        $("#vehicleDropDown, #policyDropDown").change(async function () {
-            var vehicleId = $("#vehicleDropDown").val();
-            var policyId = $("#policyDropDown").val();
 
-            try {
-                // Fetch data from both endpoints concurrently
-                const [vehicleResponse, policyResponse] = await Promise.all([
-                    fetch("/Customer/Estimate/GetVehicle", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ vehicleId: vehicleId })
-                    }),
-                    fetch("/Customer/Estimate/GetPolicy", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ policyId: policyId })
-                    })
-                ]);
+        // When the vehicle dropdown selection changes
+        $("#vehicleDropDown").change(function () {
+            // Get the selected vehicle number
+            var vehicleId = $(this).val();
 
-                if (!vehicleResponse.ok || !policyResponse.ok) {
-                    throw new Error('One or more network responses were not ok');
+            // Send an AJAX request to fetch the corresponding VehicleName
+            $.ajax({
+                url: "/Customer/Estimate/GetVehicle",
+                method: "POST",
+                data: { vehicleId: vehicleId },
+                success: function (data) {
+
+                    // Update the VehicleName input field with the received data
+                    $("input[name='Estimate.VehicleName']").val(data["name"]);
+                    $("input[name='Estimate.VehicleId']").val(data["id"]);
+                    $("input[name='Estimate.VehicleModel']").val(data["model"]);
+                    $("input[name='Estimate.VehicleVersion']").val(data["version"]);
+                    $("input[name='Estimate.VehicleValue']").val(data["vehicleValue"]);
+                    $("input[name='Estimate.VehicleRate']").val(data["rate"]);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error if any
+                    console.log(error);
                 }
+            });
+        });
 
-                // Extract JSON data from both responses
-                const [vehicleData, policyData] = await Promise.all([
-                    vehicleResponse.json(),
-                    policyResponse.json()
-                ]);
-
-                // Update the input fields with the retrieved data
-                $("input[name='Estimate.VehicleName']").val(vehicleData.name);
-                $("input[name='Estimate.VehicleId']").val(vehicleData.id);
-                $("input[name='Estimate.VehicleModel']").val(vehicleData.model);
-                $("input[name='Estimate.VehicleVersion']").val(vehicleData.version);
-                $("input[name='Estimate.VehicleValue']").val(vehicleData.vehicleValue);
-                $("input[name='Estimate.VehicleRate']").val(vehicleData.rate);
-
-                $("textarea[name='Estimate.VehicleWarranty']").val(policyData.warranty);
-                $("input[name='Estimate.PolicyId']").val(policyData.id);
-                $("input[name='Estimate.PolicyBaseCost']").val(policyData.baseCost);
-                $("input[name='Estimate.PolicyAnnualCost']").val(policyData.annualCost);
-
-                // Check if baseCost or annualCost is NaN
-                var baseCost = parseFloat(policyData.baseCost);
-                var annualCost = parseFloat(policyData.annualCost);
-                if (isNaN(baseCost) || isNaN(annualCost)) {
-                    // If either is NaN, wait for 2 seconds before executing the calculate function
-                    setTimeout(calculateEstimateCost, 2000);
-                } else {
-                    // Otherwise, execute the calculate function immediately
-                    calculateEstimateCost();
-                }
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
+        $("#estimateCostBtn").click(function () {
+            calculateEstimateCost();
         });
 
         function calculateEstimateCost() {
@@ -216,19 +241,18 @@
             var annualCost = parseFloat($("input[name='Estimate.PolicyAnnualCost']").val());
             var currentYear = new Date().getFullYear();
 
-            // Perform calculation
-            var estimateCost = baseCost + ((vehicleValue * rate) * (currentYear - version) * annualCost);
+            // Perform calculation if all necessary fields are populated
+            if (!isNaN(vehicleValue) && !isNaN(rate) && !isNaN(version) && !isNaN(baseCost) && !isNaN(annualCost)) {
+                var estimateCost = baseCost + ((vehicleValue * rate) * (currentYear - version + 1) * annualCost);
 
-            // Insert the estimateCost value into #estimateCost
-            $("#estimateCost").val(estimateCost.toFixed(2));
+                // Insert the estimateCost value into #estimateCost
+                $("#estimateCost").val(estimateCost.toFixed(0));
+            } else {
+                console.log("Some fields are empty or not valid.");
+            }
         }
-
-       
-
-        
     });
 </script>
-
 
 
 

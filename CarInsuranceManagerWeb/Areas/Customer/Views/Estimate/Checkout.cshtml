@@ -1,0 +1,25 @@
+﻿@model EstimateVM
+
+<!-- Display customer and vehicle information -->
+<div>
+    <h2>Customer Information</h2>
+    <p><strong>Name:</strong> @Model.Estimate.CustomerName</p>
+    <p><strong>Phone Number:</strong> @Model.Estimate.CustomerPhoneNumber</p>
+</div>
+
+<div>
+    <h2>Vehicle Information</h2>
+    <p><strong>Vehicle Number:</strong> @Model.Estimate.VehicleNumber</p>
+    <p><strong>Vehicle Name:</strong> @Model.Estimate.VehicleName</p>
+    <p><strong>Vehicle Model:</strong> @Model.Estimate.VehicleModel</p>
+    <p><strong>Vehicle Version:</strong> @Model.Estimate.VehicleVersion</p>
+    <p><strong>Vehicle Value:</strong> @Model.Estimate.VehicleValue</p>
+    <p><strong>Vehicle Rate:</strong> @Model.Estimate.VehicleRate</p>
+</div>
+
+<div>
+    <h2>Policy Information</h2>
+    <p><strong>Policy Type:</strong> @Model.Estimate.VehiclePolicyType</p>
+    <p><strong>Policy Base Cost:</strong> @Model.Estimate.PolicyBaseCost</p>
+    <p><strong>Policy Annual Cost:</strong> @Model.Estimate.PolicyAnnualCost</p>
+</div>

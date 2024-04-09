@@ -46,6 +46,16 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
             };
             return View(estimateVM);
         }
+        [HttpPost]
+        public IActionResult Index(EstimateVM model)
+        {
+            return RedirectToAction("Checkout", model);
+        }
+
+        public IActionResult Checkout(EstimateVM model)
+        {
+            return View(model);
+        }
 
         [HttpPost]
         public IActionResult GetVehicle(int vehicleId)
