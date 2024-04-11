@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarInsurance.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240411160302_InitDb")]
+    [Migration("20240411172659_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
