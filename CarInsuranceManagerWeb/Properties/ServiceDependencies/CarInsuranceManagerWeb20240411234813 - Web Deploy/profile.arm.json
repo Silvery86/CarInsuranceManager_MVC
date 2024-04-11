@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "CarInsuranceManagerWeb20240411092949",
+      "defaultValue": "CarInsuranceManagerWeb20240411234813",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }
