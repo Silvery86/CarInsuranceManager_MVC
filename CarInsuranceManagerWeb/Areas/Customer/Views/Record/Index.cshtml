@@ -1,5 +1,18 @@
 ﻿@model List<Record>
-
+<!-- Hero Image Starts here -->
+<div class="hero-image-small hero-small-car">
+    <div class="container">
+        <div class="hero-text-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
+                    <h3><span class="sub-heading-1"></span>Your Record List</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- Hero Image Ends here -->
 
 
 <!--  BEGIN CONTENT AREA  -->
@@ -16,33 +29,67 @@
                         <tr>
                             <th class="checkbox-column text-center"> Record Id </th>
                             <th class="text-center">Customer Add Prove</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
+                            <th>Customer Name</th>
+                            <th>Address</th>
                             <th>Mobile No.</th>
+                            <th>Vehicle No.</th>
+                            <th>Insurance Cost</th>
+                                        <th>Create Date</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center dt-no-sorting">Action</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="checkbox-column text-center"> 1 </td>
+                                    @foreach (var record in Model)
+                                    {
+                                        
+                                   
+                                    <tr>
+                                            <td class="checkbox-column text-center"> @record.Id  </td>
                             <td class="text-center">
-                                <span><img src="../src/assets/img/profile-17.jpeg" class="profile-img" alt="avatar"></span>
+                                <span><img src="~/uploads/@record.CustomerAddProve" class="profile-img" alt="avatar" width="50px" height="50px"></span>
                             </td>
-                            <td>Donna</td>
-                            <td>Rogers</td>
-                            <td>donna@yahoo.com</td>
-                            <td>555-555-5555</td>
-                            <td class="text-center"><span class="shadow-none badge badge-primary">Approved</span></td>
-                            <td class="text-center">
-                                <ul class="table-controls">
-                                    <li><a href="javascript:void(0);" class="bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-8 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
-                                    <li><a href="javascript:void(0);" class="bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
-                                </ul>
-                            </td>
+                            <td>@record.CustomerName</td>
+                            <td>@record.CustomerAddress</td>
+                            <td>@record.CustomerPhoneNumber</td>
+                            <td>@record.VehicleNumber</td>
+                                            <td>@record.InsuranceCost $/ @record.PolicyDuration</td>
+                                            <td>@record.PolicyDate</td>
+                                            @{
+                                                string badgeClass = "";
+                                                string statusText = "";
+
+                                                switch (record.PaymentStatus)
+                                                {
+                                                    case "Pending Payment":
+                                                        badgeClass = "badge-warning";
+                                                        statusText = "Pending Payment";
+                                                        break;
+                                                    case "Processing":
+                                                        badgeClass = "badge-primary";
+                                                        statusText = "Processing";
+                                                        break;
+                                                    case "Cancelled":
+                                                        badgeClass = "badge-danger";
+                                                        statusText = "Cancelled";
+                                                        break;
+                                                    case "Completed":
+                                                        badgeClass = "badge-success";
+                                                        statusText = "Completed";
+                                                        break;
+                                                    default:
+                                                        badgeClass = "badge-secondary";
+                                                        statusText = "Unknown";
+                                                        break;
+                                                }
+                                            }
+
+                                            <td class="text-center"><span class="shadow-none badge @badgeClass">@statusText</span></td>
+                                           
+                                            
+                           
                         </tr>
-                       
+                                    }
                     </tbody>
                 </table>
             </div>

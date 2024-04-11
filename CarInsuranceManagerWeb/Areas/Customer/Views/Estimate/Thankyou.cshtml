@@ -1,7 +1,21 @@
 ﻿@model CarInsurance.Models.Record
-
-<h1>Thank you for your submission!</h1>
-
+<!-- Hero Image Starts here -->
+<div class="hero-image-small hero-small-car">
+    <div class="container">
+        <div class="hero-text-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
+                    <h3><span class="sub-heading-1"></span>Thank you for your submission!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- Hero Image Ends here -->
 <p>Customer Name: @Model.CustomerName</p>
-<p>Vehicle Model: @Model.VehicleModel</p>
+<p>Vehicle Number: @Model.VehicleNumber</p>
+<label>
+    <a asp-controller="Record" asp-action="Index" class="btn btn-primary form-control ">View Your New Policy Record</a>
+</label>
 <!-- Display other properties as needed -->

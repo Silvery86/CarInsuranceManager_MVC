@@ -127,13 +127,13 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
 
                 // Save the file path to the model
                 estimateVM.Estimate.CustomerAddProve = uniqueFileName;
-
+                return RedirectToAction("Checkout", estimateVM.Estimate);
 
             }
 
 
 
-            return RedirectToAction("Checkout", estimateVM.Estimate);
+            return View();
 
         }
         private bool IsImageFile(IFormFile file)
