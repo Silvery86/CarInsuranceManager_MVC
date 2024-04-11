@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarInsurance.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateVehicleModel : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -182,6 +182,42 @@ namespace CarInsurance.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Records",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CustomerAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehiclePolicyType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PolicyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PolicyDuration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VehicleModel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VehicleNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    VehicleVersion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    VehicleRate = table.Column<int>(type: "int", nullable: false),
+                    VehicleWarranty = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    CustomerAddProve = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    InsuranceCost = table.Column<double>(type: "float", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Records", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Records_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
                 {
@@ -205,6 +241,47 @@ namespace CarInsurance.DataAccess.Migrations
                         name: "FK_Vehicles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Estimates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CustomerPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VehicleModel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VehicleNumber = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    VehicleVersion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    VehicleRate = table.Column<int>(type: "int", nullable: false),
+                    VehicleWarranty = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    VehiclePolicyType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PolicyId = table.Column<int>(type: "int", nullable: false),
+                    PolicyBaseCost = table.Column<double>(type: "float", nullable: false),
+                    PolicyAnnualCost = table.Column<double>(type: "float", nullable: false),
+                    EstimateCost = table.Column<double>(type: "float", nullable: false),
+                    CustomerAddProve = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estimates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Estimates_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Estimates_Policies_PolicyId",
+                        column: x => x.PolicyId,
+                        principalTable: "Policies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -259,6 +336,21 @@ namespace CarInsurance.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Estimates_CustomerId",
+                table: "Estimates",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Estimates_PolicyId",
+                table: "Estimates",
+                column: "PolicyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Records_CustomerId",
+                table: "Records",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_UserId",
                 table: "Vehicles",
                 column: "UserId");
@@ -283,13 +375,19 @@ namespace CarInsurance.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Policies");
+                name: "Estimates");
+
+            migrationBuilder.DropTable(
+                name: "Records");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Policies");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -1,19 +1,6 @@
 ﻿@model EstimateVM;
-<!-- Hero Image Starts here -->
-<div class="hero-image-small hero-small-car">
-    <div class="container">
-        <div class="hero-text-inner">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
-                    <h3><span class="sub-heading-1"></span>Estimate Your Cost</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<hr/>
-<!-- Hero Image Ends here -->
-<form method="post">
+
+<form method="post" enctype="multipart/form-data">
     <!-- Form section start here -->
     <div class="section-larger">
         <div class="container">
@@ -42,60 +29,71 @@
                         
                             <h6>Personal Info</h6>
                             <div class="form-group">
-                                <label asp-for="Estimate.CustomerName" class="p-0"></label>
-                                <input asp-for="Estimate.CustomerName" class="form-control" />
-                                <span asp-validation-for="Estimate.CustomerName" class="text-danger"></span>
+                            <label asp-for="@Model.Estimate.CustomerName" class="p-0"></label>
+                            <input required asp-for="@Model.Estimate.CustomerName" class="form-control" />
+                            <span asp-validation-for="@Model.Estimate.CustomerName" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="Estimate.CustomerPhoneNumber" class="p-0"></label>
-                                <input asp-for="Estimate.CustomerPhoneNumber" class="form-control" />
-                                <span asp-validation-for="Estimate.CustomerPhoneNumber" class="text-danger"></span>
+                            <label asp-for="@Model.Estimate.CustomerPhoneNumber" class="p-0"></label>
+                            <input required asp-for="@Model.Estimate.CustomerPhoneNumber" class="form-control" />
+                            <span asp-validation-for="@Model.Estimate.CustomerPhoneNumber" class="text-danger"></span>
                             </div>
+
+                        <div class="form-group">
+                            <label asp-for="@Model.Estimate.CustomerAddress" class="p-0"></label>
+                            <input required asp-for="@Model.Estimate.CustomerAddress" class="form-control" />
+                            <span asp-validation-for="@Model.Estimate.CustomerAddress" class="text-danger"></span>
+                        </div>
 
                             <h6>Car Info</h6>
                             <div class="form-group form-row">
                                 <div class="col-lg-7">
-                                <label asp-for="Estimate.VehicleNumber" class="p-0"></label>
+                                <label asp-for="@Model.Estimate.VehicleNumber" class="p-0"></label>
                                 <select asp-for="@Model.Estimate.VehicleNumber" asp-items="@Model.VehicleList" id="vehicleDropDown" class="form-control">
                                     <option value="" disabled selected>-- Select Vehicle --</option>
                                 </select>
-                                <span asp-validation-for="Estimate.VehicleNumber" class="text-danger"></span>
+                                <span asp-validation-for="@Model.Estimate.VehicleNumber" class="text-danger"></span>
                                 </div>
                                  
                                 <div class="col-lg-5">
-                                    <label asp-for="Estimate.VehicleName" class="p-0"></label>
-                                    <input asp-for="Estimate.VehicleName" class="form-control" disabled />
-                                    <span asp-validation-for="Estimate.VehicleName" class="text-danger"></span>
+                                <label asp-for="@Model.Estimate.VehicleName" class="p-0"></label>
+                                <input asp-for="@Model.Estimate.VehicleName" class="form-control" readonly />
+                                <span asp-validation-for="@Model.Estimate.VehicleName" class="text-danger"></span>
                                 </div>
 
                             </div>
 
                             <div class="form-group form-row">
                                 <div class="col-lg-7">
-                                    <label asp-for="Estimate.VehicleModel" class="p-0"></label>
-                                    <input asp-for="Estimate.VehicleModel" class="form-control" disabled />
-                                    <span asp-validation-for="Estimate.VehicleModel" class="text-danger"></span>
+                                <label asp-for="@Model.Estimate.VehicleModel" class="p-0"></label>
+                                <input asp-for="@Model.Estimate.VehicleModel" class="form-control" readonly />
+                                <span asp-validation-for="@Model.Estimate.VehicleModel" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-lg-5">
-                                    <label asp-for="Estimate.VehicleVersion" class="p-0"></label>
-                                    <input asp-for="Estimate.VehicleVersion" class="form-control" disabled />
-                                    <span asp-validation-for="Estimate.VehicleVersion" class="text-danger"></span>
+                                <label asp-for="@Model.Estimate.VehicleVersion" class="p-0"></label>
+                                <input asp-for="@Model.Estimate.VehicleVersion" class="form-control" readonly />
+                                <span asp-validation-for="@Model.Estimate.VehicleVersion" class="text-danger"></span>
                                 </div>
 
                             </div>
                         <div class="form-group form-row">
                             <div class="col-lg-7">
-                                <label asp-for="Estimate.VehicleValue" class="p-0"></label>
-                                <input asp-for="Estimate.VehicleValue" class="form-control" disabled />
-                                <span asp-validation-for="Estimate.VehicleValue" class="text-danger"></span>
+                                <label asp-for="@Model.Estimate.VehicleValue" class="p-0"></label>
+                                <input asp-for="@Model.Estimate.VehicleValue" class="form-control" readonly />
+                                <span asp-validation-for="@Model.Estimate.VehicleValue" class="text-danger"></span>
                             </div>
 
                             <div class="col-lg-5">
-                                <label asp-for="Estimate.VehicleRate" class="p-0"></label>
-                                <input asp-for="Estimate.VehicleRate" class="form-control" disabled />
-                                <span asp-validation-for="Estimate.VehicleRate" class="text-danger"></span>
+                                <label asp-for="@Model.Estimate.VehicleRate" class="p-0"></label>
+                                <input asp-for="@Model.Estimate.VehicleRate" class="form-control" readonly />
+                                <span asp-validation-for="@Model.Estimate.VehicleRate" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-12">
+                                <label asp-for="@Model.Estimate.CustomerAddProveFile" class="p-0">Customer Add Proof:</label>
+                                <input asp-for="@Model.Estimate.CustomerAddProveFile" type="file" class="form-control" />
+                                <span asp-validation-for="@Model.Estimate.CustomerAddProveFile" class="text-danger"></span>
                             </div>
 
                         </div>
@@ -109,17 +107,17 @@
                         <ul>
                             <label></label>
                             <div class="mb-3 row pd-1 col-12 w-100">
-                                <label asp-for="Estimate.VehiclePolicyType" class="p-0"></label>
+                                <label asp-for="@Model.Estimate.VehiclePolicyType" class="p-0"></label>
                                 <select asp-for="@Model.Estimate.VehiclePolicyType" asp-items="@Model.PolicyList" id="policyDropDown" class="form-select">
                                     <option disabled selected>--Select Policy--</option>
                                 </select>
-                                <span asp-validation-for="Estimate.VehiclePolicyType" class="text-danger"></span>
+                                <span asp-validation-for="@Model.Estimate.VehiclePolicyType" class="text-danger"></span>
                             </div>
-                            <input asp-for="Estimate.PolicyId" hidden />
-                            <li>
-                              
-                                <h5>Base Cost: <input asp-for="Estimate.PolicyBaseCost"  disabled /> $<span>/ Year</span></h5>
-                                <h5>Annual Cost: <input asp-for="Estimate.PolicyAnnualCost" disabled /> %<span>/ Year</span></h5>
+                            <input asp-for="@Model.Estimate.PolicyId" hidden />
+                            <textarea asp-for="@Model.Estimate.VehicleWarranty" hidden></textarea>
+                            <li>                              
+                                <h5>Base Cost: <input asp-for="@Model.Estimate.PolicyBaseCost" readonly /> $<span>/ Year</span></h5>
+                                <h5>Annual Cost: <input asp-for="@Model.Estimate.PolicyAnnualCost" readonly /> %<span>/ Year</span></h5>
                                 <p><strong>Included:</strong> Accident | Theft | Fire </p>
                             </li>
                         </ul>
@@ -129,14 +127,14 @@
                     <div class="plan">
                         <ul>
                             <li>
-                                <h5>Estimate Cost: <input disabled id="estimateCost" /> $<span>/ Year</span></h5>
+                                <h5>Estimate Cost: <input asp-for="Estimate.EstimateCost" id="estimateCost" readonly /> $<span>/ Year</span></h5>
                             </li>
                           
                         </ul>
                     </div>
 
 
-                    <button type="submit" class="btn btn-prim-round mt-4">Proceed</button>
+                    <button type="submit" id="proceedButton" class="btn btn-prim-round mt-4">Proceed</button>
                  
 
                     <div class="send-quotes bg-color-2">
@@ -175,7 +173,11 @@
 </form>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
+   
     $(document).ready(function () {
+
+        $("#proceedButton").prop("disabled", true);
+
         // When the vehicle dropdown selection changes
         $("#policyDropDown").change(function () {
             // Get the selected vehicle number
@@ -198,24 +200,24 @@
                     // Handle error if any
                     console.log(error);
                 }
+                  
             });
         });
 
         // When the vehicle dropdown selection changes
         $("#vehicleDropDown").change(function () {
             // Get the selected vehicle number
-            var vehicleId = $(this).val();
+            var vehicleNumber = $(this).val();
 
             // Send an AJAX request to fetch the corresponding VehicleName
             $.ajax({
                 url: "/Customer/Estimate/GetVehicle",
                 method: "POST",
-                data: { vehicleId: vehicleId },
+                data: { vehicleNumber: vehicleNumber },
                 success: function (data) {
 
                     // Update the VehicleName input field with the received data
-                    $("input[name='Estimate.VehicleName']").val(data["name"]);
-                    $("input[name='Estimate.VehicleId']").val(data["id"]);
+                    $("input[name='Estimate.VehicleName']").val(data["name"]);                  
                     $("input[name='Estimate.VehicleModel']").val(data["model"]);
                     $("input[name='Estimate.VehicleVersion']").val(data["version"]);
                     $("input[name='Estimate.VehicleValue']").val(data["vehicleValue"]);
@@ -225,12 +227,27 @@
                     // Handle error if any
                     console.log(error);
                 }
+                    
             });
         });
+        $("#estimateCost").on("input", function () {
+            toggleProceedButton(); // Check whenever the estimateCost changes
+        });
+
 
         $("#estimateCostBtn").click(function () {
             calculateEstimateCost();
+            toggleProceedButton();
         });
+
+        function toggleProceedButton() {
+            var estimateCost = $("#estimateCost").val();
+            if (estimateCost && !isNaN(parseFloat(estimateCost))) {
+                $("#proceedButton").prop("disabled", false);
+            } else {
+                $("#proceedButton").prop("disabled", true);
+            }
+        }
 
         function calculateEstimateCost() {
             // Get selected vehicle and policy details
@@ -243,7 +260,7 @@
 
             // Perform calculation if all necessary fields are populated
             if (!isNaN(vehicleValue) && !isNaN(rate) && !isNaN(version) && !isNaN(baseCost) && !isNaN(annualCost)) {
-                var estimateCost = baseCost + ((vehicleValue * rate) * (currentYear - version + 1) * annualCost);
+                var estimateCost = baseCost + ((vehicleValue * rate/100) * (currentYear - version + 1) * (annualCost/100));
 
                 // Insert the estimateCost value into #estimateCost
                 $("#estimateCost").val(estimateCost.toFixed(0));
@@ -253,10 +270,3 @@
         }
     });
 </script>
-
-
-
-
-
-
-

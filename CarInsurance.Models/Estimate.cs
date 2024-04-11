@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,8 +18,7 @@ namespace CarInsurance.Models
         public ApplicationUser? ApplicationUser { get; set; }
 
 
-        [DisplayName("Estimate Number")]
-        public int EstimateNumber { get; set; }
+
 
         [Required]
         [MaxLength(50)]
@@ -29,6 +29,12 @@ namespace CarInsurance.Models
         [DisplayName("Customer Phone Number")]
         [Phone]
         public required string CustomerPhoneNumber { get; set; }
+
+        [Required]
+        [DisplayName("Customer Address")]
+
+        public required string CustomerAddress { get; set; }
+
 
         [Required]
         [MaxLength(50)]
@@ -74,13 +80,7 @@ namespace CarInsurance.Models
         public int PolicyId { get; set; }
 
         [ForeignKey("PolicyId")]
-        public Policy Policy { get; set; }
-
-        [Required]
-        [DisplayName("Vehicle ID")]
-        public int VehicleId { get; set; }
-
-
+        public Policy? Policy { get; set; }
 
         [Required]
         [DisplayName("Policy Base Cost")]
@@ -93,6 +93,13 @@ namespace CarInsurance.Models
         [Required]
         [DisplayName("Estimate Cost")]
         public double EstimateCost { get; set; }
+
+        [NotMapped]
+        public IFormFile CustomerAddProveFile { get; set; }
+
+
+        [DisplayName("Customer Add Proof")]
+        public string CustomerAddProve { get; set; }
     }
 
 }

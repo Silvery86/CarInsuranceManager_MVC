@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarInsurance.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240407142403_updateEstimateModel")]
-    partial class updateEstimateModel
+    [Migration("20240410075157_InitDatabase")]
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,14 @@ namespace CarInsurance.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CustomerAddProve")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -49,9 +57,6 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Property<double>("EstimateCost")
                         .HasColumnType("float");
 
-                    b.Property<int>("EstimateNumber")
-                        .HasColumnType("int");
-
                     b.Property<double>("PolicyAnnualCost")
                         .HasColumnType("float");
 
@@ -59,9 +64,6 @@ namespace CarInsurance.DataAccess.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("PolicyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
                     b.Property<string>("VehicleModel")
@@ -90,14 +92,14 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Property<decimal>("VehicleValue")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("VehicleVersion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("VehicleWarranty")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Version")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -169,6 +171,96 @@ namespace CarInsurance.DataAccess.Migrations
                             Name = "Extended",
                             Warranty = "Damage third-party vehicle,Own Damage Theft,Damage due to fire,Naturaly damage,Personal Accident cover"
                         });
+                });
+
+            modelBuilder.Entity("CarInsurance.Models.Record", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomerAddProve")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("CustomerAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CustomerPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("InsuranceCost")
+                        .HasColumnType("float");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PolicyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PolicyDuration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("VehicleModel")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("VehicleName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("VehicleNumber")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("VehiclePolicyType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("VehicleRate")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("VehicleValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("VehicleVersion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VehicleWarranty")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Records");
                 });
 
             modelBuilder.Entity("CarInsurance.Models.Vehicle", b =>
@@ -475,6 +567,17 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Policy");
+                });
+
+            modelBuilder.Entity("CarInsurance.Models.Record", b =>
+                {
+                    b.HasOne("CarInsurance.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("CarInsurance.Models.Vehicle", b =>

@@ -9,12 +9,14 @@ namespace CarInsurance.DataAccess.Repository
         public IVehicleRepository Vehicle { get; private set; }
         public IPolicyRepository Policy { get; private set; }
         public IEstimateRepository Estimate { get; private set; }
+        public IRecordRepository Record { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Vehicle = new VehicleRepository(_db);
             Policy = new PolicyRepository(_db);
             Estimate = new EstimateRepository(_db);
+            Record = new RecordRepository(_db);
         }
 
         public void Save()

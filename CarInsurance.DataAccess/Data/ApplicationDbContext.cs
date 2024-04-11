@@ -17,6 +17,9 @@ namespace CarInsurance.DataAccess.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<Estimate> Estimates { get; set; }
+
+        public DbSet<Record> Records { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

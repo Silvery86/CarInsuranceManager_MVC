@@ -1,25 +1,90 @@
-﻿@model EstimateVM
+﻿@model Estimate
+ <!-- Form section start here -->
+<form method="post" enctype="multipart/form-data">
 
-<!-- Display customer and vehicle information -->
-<div>
-    <h2>Customer Information</h2>
-    <p><strong>Name:</strong> @Model.Estimate.CustomerName</p>
-    <p><strong>Phone Number:</strong> @Model.Estimate.CustomerPhoneNumber</p>
-</div>
+   <div class="section-larger">
+      <div class="container">
+   
+         <div class="insure-text bg-color">
+            <div class="row vertical-cntr">
+               
+               
+               <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="plan-selected">
+                     <ul>
+                         <li>
+                             
+                             <h5>@Model.EstimateCost<span> $/ 1 Year</span></h5>
+                             <p><strong>Included:</strong> Accident | Theft | Fire </p>
+                         </li>
+                     </ul>
+                     
+                 </div>
+               </div>
+            </div>
+         </div>
+   
+         <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+               <div class="insure-form">
+                  <h5>Verify your details</h5>
+                  <form>
+                     <ul class="car-info">
+                         <li><p>@Model.CustomerName</p></li>
+                         <li><p>@Model.CustomerPhoneNumber</p></li>
+                            <li><p>@Model.CustomerAddress</p></li>
+                            <li><p>@Model.VehicleNumber</p></li>
+                            <li><p>@Model.VehicleName + @Model.VehicleModel</p></li>
+                            <li><p>@Model.VehicleVersion</p></li>                           
+                     </ul>
+                    
+                     <button type="Submit" class="btn btn-prim-round mt-lg-4 mt-md-3 mt-sm-3 bg-color-pink">Buy Now</button>
+                  </form>
+               </div>
+            </div>
 
-<div>
-    <h2>Vehicle Information</h2>
-    <p><strong>Vehicle Number:</strong> @Model.Estimate.VehicleNumber</p>
-    <p><strong>Vehicle Name:</strong> @Model.Estimate.VehicleName</p>
-    <p><strong>Vehicle Model:</strong> @Model.Estimate.VehicleModel</p>
-    <p><strong>Vehicle Version:</strong> @Model.Estimate.VehicleVersion</p>
-    <p><strong>Vehicle Value:</strong> @Model.Estimate.VehicleValue</p>
-    <p><strong>Vehicle Rate:</strong> @Model.Estimate.VehicleRate</p>
-</div>
+            <div class="col-lg-5 col-md-5 col-sm-12 offset-md-2 offset-lg-2">
+                
+                
+                <div class="offers d-flex flex-column">
+            
+                    <h6 class="heading">Included Add Prove</h6>
+            
+                    <img src="~/uploads/@Model.CustomerAddProve" />
+                </div>
+           
+            
+               <div class="send-quotes bg-color-2">
+                  <h6>Send me the quote</h6>
+                  <p>We will remind you before your current policy expire.</p>
+                  <div class="quote-text">
+                     <ul>
+                        <li>
+                        <a href="#">
+                           <span class="flaticon-email"></span>
+                           <p>Email</p>
+                        </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <span class="flaticon-mobile-phone"></span>
+                              <p>SMS</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <span class="flaticon-whatsapp"></span>
+                              <p>WhatsApp</p>
+                           </a>
+                        </li>
+                  </ul>
+                  </div>
+               </div>
+            
+            </div>
 
-<div>
-    <h2>Policy Information</h2>
-    <p><strong>Policy Type:</strong> @Model.Estimate.VehiclePolicyType</p>
-    <p><strong>Policy Base Cost:</strong> @Model.Estimate.PolicyBaseCost</p>
-    <p><strong>Policy Annual Cost:</strong> @Model.Estimate.PolicyAnnualCost</p>
-</div>
+         </div>
+      </div>
+   </div>
+   <!-- Form section Ends here -->
+ </form>

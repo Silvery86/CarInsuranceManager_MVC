@@ -39,11 +39,11 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Policy Date")]
-        public double PolicyDate { get; set; }
+        public DateTime PolicyDate { get; set; }
 
         [Required]
         [DisplayName("Policy Duration")]
-        public double PolicyDuration { get; set; }
+        public string PolicyDuration { get; set; } = "1 year";
 
         [Required]
         [MaxLength(50)]
@@ -87,7 +87,14 @@ namespace CarInsurance.Models
         [DisplayName("Insurance Cost")]
         public double InsuranceCost { get; set; }
 
+        [Required]
+        [DisplayName("Payment Status")]
+        public string PaymentStatus { get; set; } = "Pending Payment";
 
+
+        [Required]
+        [DisplayName("Updated At")]
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 
 }

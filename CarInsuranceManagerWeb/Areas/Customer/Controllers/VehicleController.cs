@@ -63,7 +63,9 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(Vehicle vehicle)
         {
+            // Clear existing ModelState errors
             ModelState.Clear();
+
             // Check if VehicleValue is greater than zero
             if (vehicle.VehicleValue <= 0)
             {
@@ -134,6 +136,8 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
         [HttpPost]
         public IActionResult Edit(Vehicle vehicle)
         {
+            // Clear existing ModelState errors
+            ModelState.Clear();
             // Check if VehicleValue is greater than zero
             if (vehicle.VehicleValue <= 0)
             {
