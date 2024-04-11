@@ -7,7 +7,7 @@
         nameDropdown.innerHTML = "<option value=''>Select Name</option>";
 
         // Define available names
-        var names = ["Toyota", "Honda", "Ford"]; // Add more names as needed
+        var names = ["Toyota", "Honda", "Ford", "Chevrolet", "Hyundai", "Isuzu", "Suzuki", "Kia", "Mitsubishi", "Lexus", "Mazda", "Nissan", "Subaru", "Ssangyong", "Land Rover", "Volkswagen", "Peugeot", "Porsche", "Mercedes Benz", "BMW", "Mini Cooper", "Audi", "Lamborghini", "Volvo", "Jaguar", "Maserati", "Aston Martin", "Bentley", "Vinfast", "Renault", "Cadillac", "Fiat", "Chrysler", "Dacia", "Citroen", "Daewoo", "Ferrari", "Alfa Romeo", "Great Wall", "Infiniti", "Lancia", "BYD", "MG", "Acura", "Opel", "Chery", "Saab", "Seat", "Skoda", "VAZ", "GMC", "Aston Martin", "Bugatti", "Buick", "Bentley", "Dodge", "Hummer", "Jeep"]; // Add more names as needed
 
         // Populate name dropdown
         names.forEach(function (name) {
@@ -37,7 +37,64 @@
             "Toyota": ["Corolla", "Camry", "RAV4"],
             "Honda": ["Civic", "Accord", "CR-V"],
             "Ford": ["Focus", "Fusion", "Escape"],
-            // Add more name-model mappings as needed
+            "Chevrolet": ["Colorado", "Trailblazer"],
+            "Hyundai": [" Santafe", "Accent", "Elantra", "Kona"],
+            "Isuzu": ["Pickup", "SUV"],
+            "Suzuki": [" Celerio", "Swift", "Ciaz", "Ertiga", "Super Carry Pro"],
+            "Kia": ["Morning", "Soluto", "Cerato", "Optima", "Quoris", "Rondo", "Sorento", "Sedona."],
+            "Mitsubishi": ["Triton", "Mirage", "Attrage", "Outlander", "Pajero Sport"],
+            "Lexus": ["ES", "LS", "NX", "RX", "LX", "LC", "RC", "LS 500h"],
+            "Mazda": [" Mazda CX-5", "Mazda CX-8", "Mazda CX-3"],
+            "Nissan": ["Terra", "Sunny", "Navara", "X-Trail."],
+            "Subaru": [" XV", "Outback", "Forester", "WRX", "WRX STI."],
+            "Ssangyong": ["Tivoli", "Stavic", "Rexton."],
+            "Land Rover": ["Range Rover", "Sport", "Velar", "Evoque", "New Evoque"],
+            "Volkswagen": ["Beetle Dune", "Scirocco", "Passat", "Tiguan Allspace", "Tiguan Allspace Luxury"],
+            "Peugeot": ["Traveller, 508", "3008", "5008"],
+            "Porsche": ["911", "718 Boxster", "coupe 718 Cayman", "Gran Turismo Panamera", "SUV Cayenne", "Macan."],
+            "Mercedes Benz": ["GLA", "GLC", "GLS", "GLE", "C-Class", "E-Class", "S-Class long", "Maybach", "G-Class", "V-Class", "CLA."],
+            "BMW": ["BMW 1 Series 5 Door", "BMW 2 Series Gran Tourer", "BMW 3 Series sedan", "BMW 3 Gran Turismo", "BMW 4 Series Coupé", "BMW 5 Series Sedan", "BMW 7 Series Sedan", "X1", "X2", "X3", "X3 xDrive30e", "X4", "X4 M40i", "X5", "X6", "X7"],
+            "Mini Cooper": ["Mini 3 door", "Mini 5 door", "Mini Convertible"],
+            "Audi": ["A3", "A4", "A5", "A6", "A7", "A8", "Q2", "Q3", "Q5", "Q7", "Q8", "TT Coupé"],
+            "Lamborghini": ["Huracan LP 580-2", "Aventador LP 610-4", "Huracan Performante", "Aventador S", "Aventador LP 700-4, Urus"],
+            "Volvo": ["XC90 Excellence", "XC90 Inscription", "XC60 Inscription", "S90 Momentum", "S90 Inscription", "V90 Cross Country", "XC-40 R-Design"],
+            "Jaguar": ["E-Pace", "F-Pace", "F-Type", "I-Pace", "XE", "XF"],
+            "Maserati": ["Levante", "The new Quattroporte", "Ghibli", "GranTurismo", "GranCabrio"],
+            "Aston Martin": ["Vantage", "DB11"],
+            "Bentley": ["Mulsannel", "Flying Spur", "Continental", "Bentayga"],
+            "Vinfast": ["LUX A2.0", "LUX SA2.0", "Fadill", "VF e35", " VF e36."],
+            "Renault": ["Sandero Stepway", "Duster", "Koleos 4x2", "Koleos 4x4", "Talisman", "Latitude", "Latitude", "Logan", "Megane R.S", "Clio R.S 200 EDC", "Megane Hatchback"],
+            "Cadillac": [" Cadillac Escalade", "Cadillac XT6", "Cadillac XT5", "Cadillac XT4", "Cadillac CT6", "Cadillac CT5", "Cadillac CT5 V-Blackwing", "Cadillac CT4", "Cadillac CT4 V-Blackwing", "Cadillac XTS", "CTS-V"],
+            "Fiat": ["Fiat 500", "Fiat Punto", "Fiat Bravo"],
+            "Chrysler": ["Chrysler 200", "Chrysler 300", "Chrysler Town & Country", "Chrysler LHS Sedan", "Chrysler Concorde Sedan", "Chrysler New Yorker Sedan"],
+            "Citroen": ["Citroen C3", "Citroen C4 Cactus", "Citroen C5 Aircross", "Citroen C-Elysée", "Citroen Grand C4 SpaceTourer"],
+            "Bentley": ["Bentley Bentayga S", "Bentley Bentayga V8 ", "Bentley Bentayga Vietnam Edition V8 MY22", "Bentley Bentayga Star Edition V8 MY22", "Bentley Bentleyga Hybrid", "Bentley Bentayga Speed", "Bentley Continental GT Sky Edition V8 MY22", "Bentley Continental GT Legendary Edition V8 MY22", "Bentley Continental GT V8 Coupe", "Bentley Continental GT V8 Convertible", "Bentley Continental GT Speed Coupe"],
+            "Dodge": ["Dodge Charger", "Dodge Challenger", "Dodge Dart", "Dodge Viper", "Dodge Journey", "Dodge Durango", "Dodge Grand Caravan "],
+            "Hummer": ["Hummer H3", "H3X", "H3T", "H3 Alpha", "H2", "H2 SUT"],
+            "Jeep": ["Wrangler Sport", "Rubicon", "80th", "Willys", "Overland", "Sahara", "Altitude"],
+            "Dacia": ["Logan Steppe", "Logan Sandero", "Duster", "Dokker"],
+            "Daewoo": ["Daewoo Gentra", "Lacetti", "Lanos", "Magnus", "Nubira", "Matiz"],
+            "Ferrari": ["erarri LaFerrari", "SF90 Stradale", "F12 Berlinetta", "812 Superfast", "812 GTS", "488 GTB", "488 Pista", "F8 Tributo", "California T", "Portofino"],
+            "Alfa Romeo": ["Alfa Romeo 159", "Alfa Romeo 8C Competizione", "Alfa Romeo Stelvio", "Alfa Romeo Giulia", "Alfa Romeo 4C"],
+            "Great Wall": ["Haval Jolion", "Haval H6", "Haval H7", "Haval H9"],
+            "Infiniti": ["Infiniti QX60", "Infiniti QX70", "Infiniti QX80"],
+            "Lancia": ["Lancia Ypsilon 0.9 TwinAir CNG", "Hybrid 2021", "LPG 2021", "CNG 2021"],
+            "Lexus": ["NX 350h", "NX 350 F Sport ", "RX 350", "RX 350 Luxury", "RX 350 F Sport", "RX 500h F Sport Performance", "GX 460", "LX 600 Urban", "LX 600 VIP", "LX 600 F Sport"],
+            "BYD": ["BYD Seagull", "BYD Atto 3", "BYD Han EV", "BYD Tang", "BYD Song Plus"],
+            "MG": ["MG RX5 1.5 STD", "MG RX5 1.5 LUX", "MG 5 1.5L MT", "MG 5 1.5L CVT STD", "MG 5 1.5L CVT Delux", "MG5 LUX", "MG5 1.5L STD"],
+            "Acura": ["Acura MDX", "Acura RDX", "Acura ILX", "Acura NSX", "Acura RLX", "Acura TLX"],
+            "Opel": ["Adam, Corsavan", "Astra Notchback", "Zafira Tourer", "Insignia Sports Tourer", "Combo Tour", "Movano Combi", "Adam Rocks", "KARL", "Astra Sports Tourer", "Ampera", "Insignia Country Tourer", "Combo Cargo", "Movano Van", "Corsa 3-door", "Cascada", "GTC", "Insignia Notchback", "Mokka", "Vivaro Combi", "Corsa 5-door", "New Astra Hatchback", "Meriva", "Insignia Hatchback", "Antara, Vivaro Van"],
+            "Chery": ["Chery OMODA 5", "Chery Tiggo 2 Pro", "Chery Tiggo 4 Pro", "Chery Tiggo 7 Pro", "Chery Tiggo 8 Pro"],
+            "Saab": ["savan", "Astra Notchback", "Zafira Tourer", "Insignia Sports Tourer", "Combo Tour", "Movano Combi", "Adam Rocks", "KARL", "Astra Sports Tourer", "Ampera", "Insignia Country Tourer", "Combo Cargo", "Movano Van", "Corsa 3-door", "Cascada", "GTC", "Insignia Notchback", "Mokka", "Vivaro Combi", "Corsa 5-door", "New Astra Hatchback", "Meriva", "Insignia Hatchback", "Antara", "Vivaro Van"],
+            "Chery": ["Chery OMODA 5", "Chery Tiggo 2 Pro", "Chery Tiggo 4 Pro", "Chery Tiggo 7 Pro", "Chery Tiggo 8 Pro"],
+            "Saab": ["Saab 92", "Saab 900", "Saab 9-3", "Saab 9-5", "Saab 9-7X"],
+            "Seat": ["SEAT Ibiza", "SEAT Leon", "SEAT Arona", "SEAT Ateca", "SEAT Tarraco", "SEAT Alhambra"],
+            "Skoda": ["Skoda Karoq Ambition 1.4 TSI Turbo", "Skoda Karoq Style 1.4 TSI Turbo", "Ambition 1.4 TSI Turbo", "Style 2.0 TSI Turbo 4x4", "Skoda Octavia", "Skoda Kushaq",],
+            "VAZ": ["Lada Vesta", "Lada Granta", "Lada Niva", "Lada XRAY", "Lada 4×4", "Lada Kalina"],
+            "GMC": ["GMC Yukon", "GMC Acadia", "GMC Terrain", "Canyon", "Savana", "Sierra 1500", "Sierra 2500hd", "Sierra 3500hd"],
+            "Aston Martin": ["Rapide S", "Vanquish", "Vantage", "DB11", "DB11 AMR", "DB9 GT", "DBX", "Valkyrie", "Valhalla"],
+            "Bugatti": ["Bugatti Veyron", "Bugatti Chiron", "Bugatti Cento Dieci", "Bugatti La Voiture Noire"],
+            "Buick": ["Buick Wildcat EV", "Buick Electra-X"],// Add more name-model mappings as needed
         };
 
         // Populate models dropdown based on selected name
