@@ -125,6 +125,8 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
                     await estimateVM.Estimate.CustomerAddProveFile.CopyToAsync(fileStream);
                 }
 
+                Policy existPolicy = _unitOfWork.Policy.Get(u => u.Id == estimateVM.Estimate.PolicyId);
+                estimateVM.Estimate.VehiclePolicyType = existPolicy.Name;
                 // Save the file path to the model
                 estimateVM.Estimate.CustomerAddProve = uniqueFileName;
                 return RedirectToAction("Checkout", estimateVM.Estimate);

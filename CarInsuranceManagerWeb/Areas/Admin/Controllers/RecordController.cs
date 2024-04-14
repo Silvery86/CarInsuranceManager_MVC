@@ -34,7 +34,35 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
 
             return View(records);
         }
+        public IActionResult Process(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Record? Record = _unitOfWork.Record.Get(u => u.Id == id); // Find only work with primary key
+            // Policy? Policy1 = _db.Policys.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Policy? Policy2 = _db.Policys.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (Record == null)
+            {
+                return NotFound();
+            }
+            return View(Record);
+        }
 
+        [HttpPost]
+        public IActionResult Process(Record Record)
+        {
+            if (ModelState.IsValid)
+            {
+                // Update other properties as needed
+
+                _unitOfWork.Record.Update(Record);
+                TempData["success"] = "Policy edited successfully";
+                _unitOfWork.Save();
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }

@@ -1,0 +1,134 @@
+﻿@model Record;
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12 mt-3">
+                    <h4>Process Insurance</h4>
+                </div>
+            </div>
+<div class="container">
+    <form method="post">
+        <input asp-for="Id" hidden />
+        <input asp-for="CustomerId" hidden />
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4 row justify-content-evenly">
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="CustomerName" class="p-0"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="CustomerAddress" class="p-0"></label>
+                <input asp-for="CustomerAddress" class="form-control" />
+                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="CustomerPhoneNumber" class="p-0"></label>
+                <input asp-for="CustomerPhoneNumber" class="form-control" />
+                <span asp-validation-for="CustomerPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleName" class="p-0"></label>
+                <input asp-for="VehicleName" class="form-control" readonly />
+                <span asp-validation-for="VehicleName" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleModel" class="p-0"></label>
+                <input asp-for="VehicleModel" class="form-control" readonly />
+                <span asp-validation-for="VehicleModel" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleVersion" class="p-0"></label>
+                <input asp-for="VehicleVersion" class="form-control" readonly />
+                <span asp-validation-for="VehicleVersion" class="text-danger"></span>
+            </div>
+           
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleNumber" class="p-0"></label>
+                <input asp-for="VehicleNumber" class="form-control" readonly />
+                <span asp-validation-for="VehicleNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehiclePolicyType" class="p-0"></label>
+                <input asp-for="VehiclePolicyType" class="form-control" readonly />
+                <span asp-validation-for="VehiclePolicyType" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleWarranty" class="p-0"></label>
+                <input asp-for="VehicleWarranty" class="form-control" readonly />
+                <span asp-validation-for="VehicleWarranty" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="InsuranceCost" class="p-0"></label>
+                <input asp-for="InsuranceCost" class="form-control" readonly />
+                <span asp-validation-for="InsuranceCost" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="CustomerAddProve" class="p-0"></label>
+                <img src="~/uploads/@Model.CustomerAddProve" />
+                <input asp-for="CustomerAddProve" class="form-control" hidden />
+                <span asp-validation-for="CustomerAddProve" class="text-danger"></span>
+            </div>
+           
+            <div class="mb-3 row pd-1">
+                <label asp-for="PaymentStatus" class="p-0">Payment Status</label>
+                @{
+                    List<SelectListItem> paymentStatusList = new List<SelectListItem>
+                {
+                new SelectListItem { Value = "Pending Payment", Text = "Pending Payment", Selected = Model.PaymentStatus == "Pending Payment" },
+                new SelectListItem { Value = "Processing", Text = "Processing", Selected = Model.PaymentStatus == "Processing" },
+                new SelectListItem { Value = "Cancelled", Text = "Cancelled", Selected = Model.PaymentStatus == "Cancelled" },
+                new SelectListItem { Value = "Completed", Text = "Completed", Selected = Model.PaymentStatus == "Completed" }
+                };
+
+                    string badgeClass = Model.PaymentStatus switch
+                    {
+                        "Pending Payment" => "badge-warning",
+                        "Processing" => "badge-primary",
+                        "Cancelled" => "badge-danger",
+                        "Completed" => "badge-success",
+                        
+                    };
+                }
+                <td class="text-center">
+                    <select class="form-select @badgeClass" asp-for="@Model.PaymentStatus">
+                        @foreach (var item in paymentStatusList)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </td>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Policy" asp-action="Index" class="btn btn-secondary border form-control">
+                        Back to List <i class="bi bi-backspace"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+        </div>
+    </div>
+
+</div>
+
+        </div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+
