@@ -35,7 +35,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/font-awesome-4.7.0/css/font-awesome.min.css">
-    
+
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <link href="~/admin/src/assets/css/light/apps/invoice-preview.css" rel="stylesheet" type="text/css" />
+    <link href="~/admin/src/assets/css/dark/apps/invoice-preview.css" rel="stylesheet" type="text/css" />
+    <!--  END CUSTOM STYLE FILE  -->
 </head>
 <body class=" layout-boxed enable-secondaryNav">
     <!-- BEGIN LOADER -->
@@ -121,7 +125,9 @@
                         <li>
                                 <a asp-area="Admin" asp-controller="Record" asp-action="Index"> Process Record </a>
                         </li>
-                        
+                            <li>
+                                <a asp-area="Admin" asp-controller="Billing" asp-action="Index"> Bill List </a>
+                            </li>
                     </ul>
                 </li>
 
@@ -167,8 +173,8 @@
 
     </div>
     <!--  END SIDEBAR  -->
-       
-    @RenderBody()
+        <partial name="_Notification" />
+        @RenderBody()
 
 
           

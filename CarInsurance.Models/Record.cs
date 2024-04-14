@@ -11,7 +11,7 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Customer ID")]
-        public string CustomerId { get; set; }
+        public required string CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]
         public ApplicationUser? ApplicationUser { get; set; }
@@ -39,7 +39,7 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Policy Date")]
-        public DateTime PolicyDate { get; set; }
+        public DateTime PolicyDate { get; set; } = DateTime.Now;
 
         [Required]
         [DisplayName("Policy Duration")]
@@ -92,9 +92,9 @@ namespace CarInsurance.Models
         public string PaymentStatus { get; set; } = "Pending Payment";
 
 
-        [Required]
-        [DisplayName("Updated At")]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public bool isBilled { get; set; } = false;
+
+
     }
 
 }

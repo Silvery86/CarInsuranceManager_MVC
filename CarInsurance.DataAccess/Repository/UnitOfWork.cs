@@ -10,6 +10,7 @@ namespace CarInsurance.DataAccess.Repository
         public IPolicyRepository Policy { get; private set; }
         public IEstimateRepository Estimate { get; private set; }
         public IRecordRepository Record { get; private set; }
+        public IBillingRepository Billing { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -17,6 +18,7 @@ namespace CarInsurance.DataAccess.Repository
             Policy = new PolicyRepository(_db);
             Estimate = new EstimateRepository(_db);
             Record = new RecordRepository(_db);
+            Billing = new BillingRepository(_db);
         }
 
         public void Save()

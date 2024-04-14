@@ -69,9 +69,23 @@
                                             }
 
                                             <td class="text-center"><span class="shadow-none badge @badgeClass">@statusText</span></td>
-                            <td class="text-center">
-                                                <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-success btn-rounded mb-2 me-4">Process</a>
-                            </td>
+                                            <td class="text-center">
+                                                @if (statusText != "Completed")
+                                                {
+                                                    <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-success btn-rounded mb-2 me-4">Process</a>
+                                                }
+                                                else
+                                                {
+                                                    @if (record.isBilled)
+                                                    {
+                                                        <a asp-controller="Record" asp-action="Index"  class="btn btn-warning btn-rounded mb-2 me-4">Billed</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Record" asp-action="Billing" asp-route-id="@record.Id" class="btn btn-primary btn-rounded mb-2 me-4">Billing</a>
+                                                    }
+                                                }
+                                            </td>
                                         
                         </tr>
                        }

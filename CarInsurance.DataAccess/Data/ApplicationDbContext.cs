@@ -20,6 +20,8 @@ namespace CarInsurance.DataAccess.Data
 
         public DbSet<Record> Records { get; set; }
 
+        public DbSet<Billing> Billings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarInsurance.Models
 {
-    public class Estimate
+    public class Billing
     {
         [Key]
         public int Id { get; set; }
@@ -17,13 +16,15 @@ namespace CarInsurance.Models
         [ForeignKey("CustomerId")]
         public ApplicationUser? ApplicationUser { get; set; }
 
-
-
-
         [Required]
         [MaxLength(50)]
         [DisplayName("Customer Name")]
         public required string CustomerName { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("Customer Address")]
+        public required string CustomerAddress { get; set; }
 
         [Required]
         [DisplayName("Customer Phone Number")]
@@ -31,10 +32,26 @@ namespace CarInsurance.Models
         public required string CustomerPhoneNumber { get; set; }
 
         [Required]
-        [DisplayName("Customer Address")]
+        [MaxLength(50)]
+        [DisplayName("Vehicle Policy Type")]
+        public required string VehiclePolicyType { get; set; }
 
-        public required string CustomerAddress { get; set; }
 
+        [Required]
+        [DisplayName("Policy Start Date")]
+        public DateTime PolicyStartDate { get; set; }
+
+        [Required]
+        [DisplayName("Policy End Date")]
+        public DateTime PolicyEndDate { get; set; }
+
+        [Required]
+        [DisplayName("Policy Duration")]
+        public string PolicyDuration { get; set; } = "1 year";
+
+        [Required]
+        [DisplayName("Bill No.")]
+        public string BillNo { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [MaxLength(50)]
@@ -70,36 +87,19 @@ namespace CarInsurance.Models
         public required string VehicleWarranty { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        [DisplayName("Vehicle Policy Type")]
-        public required string VehiclePolicyType { get; set; }
-
-        // Foreign key relationship to Policy model
-        [Required]
-        [DisplayName("Policy ID")]
-        public int PolicyId { get; set; }
-
-        [ForeignKey("PolicyId")]
-        public Policy? Policy { get; set; }
-
-        [Required]
-        [DisplayName("Policy Base Cost")]
-        public double PolicyBaseCost { get; set; }
-
-        [Required]
-        [DisplayName("Policy Annual Cost")]
-        public double PolicyAnnualCost { get; set; }
-
-        [Required]
-        [DisplayName("Estimate Cost")]
-        public double EstimateCost { get; set; }
-
-        [NotMapped]
-        public required IFormFile CustomerAddProveFile { get; set; }
-
-
-        [DisplayName("Customer Add Proof")]
+        [MaxLength(200)]
+        [DisplayName("Customer Add Prove")]
         public required string CustomerAddProve { get; set; }
+
+        [Required]
+        [DisplayName("Payment Amount")]
+        public double Amount { get; set; }
+
+        [Required]
+        [DisplayName("Billing At")]
+        public DateTime BillingAt { get; set; } = DateTime.Now;
     }
 
 }
+
+

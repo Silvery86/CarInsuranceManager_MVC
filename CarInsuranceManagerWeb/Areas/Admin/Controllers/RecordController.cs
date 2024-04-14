@@ -64,5 +64,68 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Billing(int? id)
+        {
+            ModelState.Clear();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Record? Record = _unitOfWork.Record.Get(u => u.Id == id);
+            if (Record == null)
+            {
+                return NotFound();
+            }
+
+            var billing = new Billing()
+            {
+                CustomerId = Record.CustomerId,
+                CustomerName = Record.CustomerName,
+                CustomerAddress = Record.CustomerAddress,
+                CustomerPhoneNumber = Record.CustomerPhoneNumber,
+                VehiclePolicyType = Record.VehiclePolicyType,
+                PolicyStartDate = Record.PolicyDate,
+                PolicyEndDate = Record.PolicyDate.AddYears(1),
+                PolicyDuration = Record.PolicyDuration,
+                VehicleNumber = Record.VehicleNumber,
+                VehicleName = Record.VehicleName,
+                VehicleModel = Record.VehicleModel,
+                VehicleVersion = Record.VehicleVersion,
+                VehicleValue = Record.VehicleValue,
+                VehicleRate = Record.VehicleRate,
+                VehicleWarranty = Record.VehicleWarranty,
+                CustomerAddProve = Record.CustomerAddProve,
+                Amount = Record.InsuranceCost,
+                BillingAt = DateTime.Now,
+            };
+            Record.isBilled = true;
+            TryValidateModel(billing);
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Record.Update(Record);
+                _unitOfWork.Billing.Add(billing);
+                TempData["success"] = "Bill created successfully!";
+                await _unitOfWork.SaveChangesAsync();
+
+                // Pass the record object to the view
+                return View("Billing", billing);
+            }
+
+            return View("Home");
+        }
+
+        public async Task<IActionResult> SendInvoiceActionAsync()
+        {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "Account"); // Redirect if user is not authenticated
+            }
+
+
+            TempData["success"] = "Bill sent to customer successfully!";
+            return RedirectToAction("Index", "Billing");
+        }
+
     }
 }
