@@ -4,10 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarInsuranceManagerWeb", "CarInsuranceManagerWeb\CarInsuranceManagerWeb.csproj", "{04DF07D2-0F1A-4C77-9143-4E66D4E614CC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4E93BBE6-F657-450C-B09D-8F7A9BEE6E82} = {4E93BBE6-F657-450C-B09D-8F7A9BEE6E82}
-		{6431C7E4-A905-48BF-95A3-4B9D05643D48} = {6431C7E4-A905-48BF-95A3-4B9D05643D48}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarInsurance.DataAccess", "CarInsurance.DataAccess\CarInsurance.DataAccess.csproj", "{C594EBC3-DECC-4225-B444-0331406444A7}"
 EndProject
