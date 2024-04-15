@@ -113,7 +113,7 @@
                                 </select>
                                 <span asp-validation-for="@Model.Estimate.VehiclePolicyType" class="text-danger"></span>
                             </div>
-                            <input asp-for="@Model.Estimate.PolicyId" value="@Model.PolicyList" hidden />
+                            <input asp-for="@Model.Estimate.PolicyId" hidden />
                             <textarea asp-for="@Model.Estimate.VehicleWarranty" hidden></textarea>
                             <li>                              
                                 <h5>Base Cost: <input asp-for="@Model.Estimate.PolicyBaseCost" readonly /> $<span>/ Year</span></h5>
