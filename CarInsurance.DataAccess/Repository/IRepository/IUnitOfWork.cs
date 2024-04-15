@@ -9,6 +9,8 @@
 
         IRecordRepository Record { get; }
         IBillingRepository Billing { get; }
+
+        IClaimRepository Claim { get; }
         void Save();
         Task<int> SaveChangesAsync();
     }

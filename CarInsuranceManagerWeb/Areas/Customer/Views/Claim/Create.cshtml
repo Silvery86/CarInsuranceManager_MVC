@@ -1,0 +1,102 @@
+﻿@model Vehicle;
+
+<!-- Hero Image Starts here -->
+<div class="hero-image-small hero-small-car">
+    <div class="container">
+        <div class="hero-text-inner">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
+                    <h3><span class="sub-heading-1"></span>Add New Vehicle</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<!-- Hero Image Ends here -->
+<div class="container">
+
+    <form method="post">
+        <div class="border p-3 mt-4 row justify-content-evenly">
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="Name" class="p-0"></label>
+                <select asp-for="Name" id="nameDropdown" class="form-control">
+                    <option value="" disabled>Select Name</option>
+                </select>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="OwnerName" class="p-0"></label>
+                <input asp-for="OwnerName" class="form-control" />
+                <span asp-validation-for="OwnerName" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="Model" class="p-0"></label>
+                <select asp-for="Model" id="modelDropdown" class="form-control">
+                    <option value="" disabled>Select Model</option>
+                </select>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="Version" class="p-0"></label>
+                <select asp-for="Version" class="form-control">
+                    @for (int year = DateTime.Now.Year; year >= DateTime.Now.Year - 20; year--)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+                <span asp-validation-for="Version" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleValue" class="p-0"></label>
+                <input asp-for="VehicleValue" class="form-control" />
+                <span asp-validation-for="VehicleValue" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="Rate" class="p-0"></label>
+                <select asp-for="Rate" class="form-control">
+                    <option value="50">50%</option>
+                    <option value="70">70%</option>
+                    <option value="75">75%</option>
+                    <option value="90">90%</option>
+                    <option value="100">100%</option>
+                </select>
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="BodyNumber" class="p-0"></label>
+                <input asp-for="BodyNumber" class="form-control" />
+                <span asp-validation-for="BodyNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="EngineNumber" class="p-0"></label>
+                <input asp-for="EngineNumber" class="form-control" />
+                <span asp-validation-for="EngineNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="Number" class="p-0"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Add</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary border form-control">
+                        Back to List <i class="bi bi-backspace"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+    <partial name="_VehicleList" />
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
