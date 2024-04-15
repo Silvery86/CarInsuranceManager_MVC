@@ -4,15 +4,14 @@ using CarInsurance.DataAccess.Repository.IRepository;
 using CarInsurance.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // Connect Database
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<ApplicationDbContext>(
+// options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 
