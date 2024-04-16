@@ -1,4 +1,4 @@
-﻿@model Vehicle;
+﻿@model Claim;
 
 <!-- Hero Image Starts here -->
 <div class="hero-image-small hero-small-car">
@@ -6,7 +6,7 @@
         <div class="hero-text-inner">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
-                    <h3><span class="sub-heading-1"></span>Delete  Vehicle</h3>
+                    <h3><span class="sub-heading-1"></span>Delete Claim Record</h3>
                 </div>
             </div>
         </div>
@@ -17,56 +17,99 @@
 <div class="container">
 
     <form method="post">
-        <input asp-for="Id" hidden />
+
         <div class="border p-3 mt-4 row justify-content-evenly">
+
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Name" class="p-0"></label>
-                <input asp-for="Name" disabled class="form-control" />
-          
+                <label asp-for="VehicleNumber" class="p-0"></label>
+                <input asp-for="VehicleNumber" class="form-control" readonly />
+                <span asp-validation-for="VehicleNumber" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="OwnerName" class="p-0"></label>
-                <input asp-for="OwnerName" disabled class="form-control" />
-        
+                <label asp-for="CustomerName" class="p-0"></label>
+                <input asp-for="CustomerName" class="form-control" readonly />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <input asp-for="BillingId" class="form-control" hidden />
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="BillNo" class="p-0"></label>
+                <input asp-for="BillNo" class="form-control" readonly />
+                <span asp-validation-for="BillNo" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Model" class="p-0"></label>
-                <input asp-for="Model" disabled class="form-control" />
+                <label asp-for="VehiclePolicyType" class="p-0"></label>
+                <input asp-for="VehiclePolicyType" class="form-control" readonly />
+                <span asp-validation-for="VehiclePolicyType" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Version" class="p-0"></label>
-                <input asp-for="Version" disabled class="form-control" />
+                <label asp-for="PolicyStartDate" class="p-0"></label>
+                <input asp-for="PolicyStartDate" class="form-control" readonly />
+                <span asp-validation-for="PolicyStartDate" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="VehicleValue" class="p-0"></label>
-                <input asp-for="VehicleValue" disabled class="form-control" />
+                <label asp-for="PolicyEndDate" class="p-0"></label>
+                <input asp-for="PolicyEndDate" class="form-control" readonly />
+                <span asp-validation-for="PolicyEndDate" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Rate" class="p-0"></label>
-                <input asp-for="Rate" disabled class="form-control" />
-             
+                <label asp-for="PolicyDuration" class="p-0"></label>
+                <input asp-for="PolicyDuration" class="form-control" readonly />
+                <span asp-validation-for="PolicyDuration" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="BodyNumber" class="p-0"></label>
-                <input asp-for="BodyNumber" disabled class="form-control" />
-             
+                <label asp-for="VehicleName" class="p-0"></label>
+                <input asp-for="VehicleName" class="form-control" readonly />
+                <span asp-validation-for="VehicleName" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="EngineNumber" class="p-0"></label>
-                <input asp-for="EngineNumber" disabled class="form-control" />
-           
+                <label asp-for="VehicleModel" class="p-0"></label>
+                <input asp-for="VehicleModel" class="form-control" readonly />
+                <span asp-validation-for="VehicleModel" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Number" class="p-0"></label>
-                <input asp-for="Number" disabled class="form-control" />
-        
+                <label asp-for="VehicleVersion" class="p-0"></label>
+                <input asp-for="VehicleVersion" class="form-control" readonly />
+                <span asp-validation-for="VehicleVersion" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="VehicleRate" class="p-0"></label>
+                <input asp-for="VehicleRate" class="form-control" readonly />
+                <span asp-validation-for="VehicleRate" class="text-danger"></span>
+            </div>
+            <input asp-for="VehicleNumber" class="form-control" hidden />
+            <input asp-for="VehicleValue" class="form-control" hidden />
+
+            <input asp-for="VehicleWarranty" class="form-control" hidden />
+            <input asp-for="Id" class="form-control" hidden />
+            <input asp-for="InsuranceCost" class="form-control" hidden />
+
+            <div class="mb-3 row pd-1 col-12">
+                <label asp-for="PlaceOfAccident" class="p-0"></label>
+                <input asp-for="PlaceOfAccident" class="form-control" readonly />
+                <span asp-validation-for="PlaceOfAccident" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="DateOfAccident" class="p-0"></label>
+                <input asp-for="DateOfAccident" class="form-control" readonly />
+                <span asp-validation-for="DateOfAccident" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="InsuranceAmount" class="p-0"></label>
+                <input asp-for="InsuranceAmount" class="form-control" readonly />
+                <span asp-validation-for="InsuranceAmount" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="ClaimableAmount" class="p-0"></label>
+                <input asp-for="ClaimableAmount" class="form-control" readonly />
+                <span asp-validation-for="ClaimableAmount" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-6 col-md-3">
-                    <button type="submit" class="btn btn-danger form-control">Delete</button>
+                    <button type="submit" class="btn btn-primary form-control">Delete</button>
                 </div>
                 <div class="col-6 col-md-3">
-                    <a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary border form-control">
+                    <a asp-controller="Claim" asp-action="Index" class="btn btn-secondary border form-control">
                         Back to List <i class="bi bi-backspace"></i>
                     </a>
                 </div>
@@ -75,10 +118,3 @@
     </form>
 
 </div>
-@section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-}
-
-

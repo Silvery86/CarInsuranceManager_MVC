@@ -121,6 +121,130 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
             return Json(billing);
         }
 
+        public async Task<IActionResult> EditAsync(int? id)
+        {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (currentUser == null)
+            {
+                // Handle if user is not authenticated
+                return RedirectToAction("Login", "Account");
+            }
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Claim? claim = _unitOfWork.Claim.Get(u => u.Id == id); // Find only work with primary key
+            // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (claim == null)
+            {
+                return NotFound();
+            }
+            ClaimVM claimVM = new()
+            {
+                Claim = claim,
+                BillList = _unitOfWork.Billing.GetAllByUserId(currentUser.Id).Select(u => new SelectListItem
+                {
+                    Text = u.VehicleNumber,
+                    Value = u.Id.ToString(),
+                }),
+
+            };
+            return View(claimVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(ClaimVM claimVM)
+        {
+            // Clear existing ModelState errors
+            ModelState.Clear();
+
+            // Check if VehicleValue is greater than zero
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (currentUser == null)
+            {
+                // Handle if user is not authenticated
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Fetch the existing claim from the data store
+            var existingClaim = _unitOfWork.Claim.Get(u => u.Id == claimVM.Claim.Id);
+
+            if (existingClaim == null)
+            {
+                // Handle if the claim does not exist
+                return NotFound();
+            }
+
+            // Update the properties of the existing claim
+            existingClaim.CustomerId = currentUser.Id;
+            existingClaim.CustomerName = claimVM.Claim.CustomerName;
+            existingClaim.BillingId = claimVM.Claim.BillingId;
+            existingClaim.BillNo = claimVM.Claim.BillNo;
+            existingClaim.VehiclePolicyType = claimVM.Claim.VehiclePolicyType;
+            existingClaim.PolicyStartDate = claimVM.Claim.PolicyStartDate;
+            existingClaim.PolicyEndDate = claimVM.Claim.PolicyEndDate;
+            existingClaim.PolicyDuration = claimVM.Claim.PolicyDuration;
+            existingClaim.VehicleName = claimVM.Claim.VehicleName;
+            existingClaim.VehicleModel = claimVM.Claim.VehicleModel;
+            existingClaim.VehicleNumber = claimVM.Claim.VehicleNumber;
+            existingClaim.VehicleVersion = claimVM.Claim.VehicleVersion;
+            existingClaim.VehicleRate = claimVM.Claim.VehicleRate;
+            existingClaim.VehicleWarranty = claimVM.Claim.VehicleWarranty;
+            existingClaim.VehicleValue = claimVM.Claim.VehicleValue;
+            existingClaim.InsuranceCost = claimVM.Claim.InsuranceCost;
+            existingClaim.PlaceOfAccident = claimVM.Claim.PlaceOfAccident;
+            existingClaim.DateOfAccident = claimVM.Claim.DateOfAccident;
+            existingClaim.InsuranceAmount = claimVM.Claim.InsuranceAmount;
+            existingClaim.ClaimableAmount = claimVM.Claim.ClaimableAmount;
+            existingClaim.ClaimStatus = "Processing";
+
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Claim.Update(existingClaim);
+                TempData["success"] = "Claim edited successfully";
+                _unitOfWork.Save();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteAsync(int? id)
+        {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (currentUser == null)
+            {
+                // Handle if user is not authenticated
+                return RedirectToAction("Login", "Account");
+            }
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Claim? claim = _unitOfWork.Claim.Get(u => u.Id == id); // Find only work with primary key
+            // Vehicle? vehicle1 = _db.Vehicles.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Vehicle? vehicle2 = _db.Vehicles.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (claim == null)
+            {
+                return NotFound();
+            }
+            return View(claim);
+        }
+        [HttpPost, ActionName("Delete")]
+
+        public IActionResult DeletePOST(int? id)
+        {
+            Claim? claim = _unitOfWork.Claim.Get(u => u.Id == id);
+            if (claim == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Claim.Remove(claim);
+            _unitOfWork.Save();
+            TempData["success"] = "Claim remove successfully";
+            return RedirectToAction("Index");
+
+        }
+
+
 
     }
 }

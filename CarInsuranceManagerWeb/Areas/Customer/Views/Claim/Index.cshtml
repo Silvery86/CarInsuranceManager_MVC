@@ -42,7 +42,7 @@
                     <table id="zero-config" class="table table-striped dt-table-hover dataTable" style="width: 100%;" role="grid" aria-describedby="zero-config_info">
                         <thead>
                             <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Asign User</th>
+                     
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Customer Name</th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Bill No.</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Model</th>
@@ -54,21 +54,60 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Insurance Amount</th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Claimable Amount</th>
                                     <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Status</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var vehicle in Model)
+                            @foreach (var claim in Model)                           
                             {
-                        <tr>
-                            
+                                    <tr>
+                                
+                                        <td>@claim.CustomerName</td>
+                                        <td>@claim.BillNo</td>
+                                        <td>@claim.VehicleModel</td>
+                                        <td>@claim.VehiclePolicyType</td>
+                                        <td>@claim.PolicyStartDate</td>
+                                        <td>@claim.PolicyEndDate</td>
+                                        <td>@claim.VehicleNumber</td>
+                                        <td>@claim.PlaceOfAccident</td>
+                                        <td>@claim.InsuranceAmount</td>
+                                        <td>@claim.ClaimableAmount</td>
+
+                                        @{
+                                            string badgeClass = "";
+                                            string statusText = "";
+
+                                            switch (claim.ClaimStatus)
+                                            {
+                                                
+                                                case "Processing":
+                                                    badgeClass = "badge-primary";
+                                                    statusText = "Processing";
+                                                    break;
+                                                case "Cancelled":
+                                                    badgeClass = "badge-danger";
+                                                    statusText = "Cancelled";
+                                                    break;
+                                                case "Completed":
+                                                    badgeClass = "badge-success";
+                                                    statusText = "Completed";
+                                                    break;
+                                                default:
+                                                    badgeClass = "badge-warning";
+                                                    statusText = "Unknown";
+                                                    break;
+                                            }
+                                        }
+
+                                        <td class="text-center"><span class="shadow-none badge @badgeClass">@statusText</span></td>
               
                 <td class="text-center">
                     <div class="action-btns">
-                       
-                        <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Edit">
+
+                                                <a asp-controller="Claim" asp-action="Edit" asp-route-id="@claim.Id" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Edit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                         </a>
-                        <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <a asp-controller="Claim" asp-action="Delete" asp-route-id="@claim.Id" class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="Delete">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                         </a>
                     </div>
