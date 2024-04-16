@@ -1,4 +1,4 @@
-﻿@model List<Vehicle>
+﻿@model List<Claim>
 <!-- Hero Image Starts here -->
 <div class="hero-image-small hero-small-car">
     <div class="container">
@@ -28,8 +28,8 @@
                     <div class="col-12">
                         <div class="row mt-3 mb-3">
                             <div class="col-6">
-                                <a class="btn btn-primary" asp-controller="Vehicle" asp-action="Create">
-                                    <i class="bi bi-plus-circle"></i> Add New Vehicle
+                                <a class="btn btn-primary" asp-controller="Claim" asp-action="Create">
+                                    <i class="bi bi-plus-circle"></i> Make new claim record
                                 </a>
                             </div>
                            
@@ -43,52 +43,24 @@
                         <thead>
                             <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Asign User</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Vehicle Name</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Owner Name</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Customer Name</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Bill No.</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Model</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Version</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Vehicle Value</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Insurance Rate</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Body Number</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Engine Number</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Number</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Options</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" >Policy</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Policy Start Date</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Policy End Date</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Vehicle Number</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Place Of Accident</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Insurance Amount</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Claimable Amount</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var vehicle in Model)
                             {
                         <tr>
-                                            <td>
-                                                @vehicle.UserName
-                                            </td>
-                    <td>
-                        @vehicle.Name
-                    </td>
-                    <td>
-                        @vehicle.OwnerName
-                    </td>
-                    <td>
-                        @vehicle.Model
-                    </td>
-                    <td>
-                        @vehicle.Version
-                    </td>
-                    <td>
-                        @(decimal.Round(vehicle.VehicleValue / 1000, 3).ToString("N3") + " $")
-                    </td>
-                    <td>
-                        @((vehicle.Rate.ToString()) + "%")
-                    </td>
-                    <td>
-                        @vehicle.BodyNumber
-                    </td>
-                    <td>
-                        @vehicle.EngineNumber
-                    </td>
-                    <td>
-                        @vehicle.Number
-                    </td>
+                            
               
                 <td class="text-center">
                     <div class="action-btns">

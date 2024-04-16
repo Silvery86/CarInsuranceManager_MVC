@@ -180,6 +180,7 @@
 
         // When the vehicle dropdown selection changes
         $("#policyDropDown").change(function () {
+            $("#proceedButton").prop("disabled", true);
             // Get the selected vehicle number
             var policyId = $(this).val();
 
@@ -206,6 +207,7 @@
 
         // When the vehicle dropdown selection changes
         $("#vehicleDropDown").change(function () {
+            $("#proceedButton").prop("disabled", true);
             // Get the selected vehicle number
             var vehicleNumber = $(this).val();
 

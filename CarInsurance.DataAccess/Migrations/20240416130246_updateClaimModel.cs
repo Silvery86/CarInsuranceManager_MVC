@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarInsurance.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addClaimModeltoDB : Migration
+    public partial class updateClaimModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,9 +34,10 @@ namespace CarInsurance.DataAccess.Migrations
                     VehicleWarranty = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     InsuranceCost = table.Column<double>(type: "float", nullable: false),
                     PlaceOfAccident = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DateOfAccident = table.Column<DateTime>(type: "datetime2", maxLength: 200, nullable: false),
+                    DateOfAccident = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InsuranceAmount = table.Column<double>(type: "float", nullable: false),
-                    ClaimableAmount = table.Column<double>(type: "float", nullable: false)
+                    ClaimableAmount = table.Column<double>(type: "float", nullable: false),
+                    ClaimStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,18 +48,7 @@ namespace CarInsurance.DataAccess.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Claims_Billings_BillingId",
-                        column: x => x.BillingId,
-                        principalTable: "Billings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Claims_BillingId",
-                table: "Claims",
-                column: "BillingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Claims_CustomerId",

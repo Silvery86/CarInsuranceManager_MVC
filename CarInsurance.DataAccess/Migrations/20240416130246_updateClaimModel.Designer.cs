@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarInsurance.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240415025925_addClaimModeltoDB")]
-    partial class addClaimModeltoDB
+    [Migration("20240416130246_updateClaimModel")]
+    partial class updateClaimModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,6 +133,10 @@ namespace CarInsurance.DataAccess.Migrations
                     b.Property<int>("BillingId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ClaimStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("ClaimableAmount")
                         .HasColumnType("float");
 
@@ -146,7 +150,6 @@ namespace CarInsurance.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("DateOfAccident")
-                        .HasMaxLength(200)
                         .HasColumnType("datetime2");
 
                     b.Property<double>("InsuranceAmount")
@@ -206,8 +209,6 @@ namespace CarInsurance.DataAccess.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BillingId");
 
                     b.HasIndex("CustomerId");
 
@@ -752,12 +753,6 @@ namespace CarInsurance.DataAccess.Migrations
 
             modelBuilder.Entity("CarInsurance.Models.Claim", b =>
                 {
-                    b.HasOne("CarInsurance.Models.Billing", "Billing")
-                        .WithMany()
-                        .HasForeignKey("BillingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarInsurance.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("CustomerId")
@@ -765,8 +760,6 @@ namespace CarInsurance.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("Billing");
                 });
 
             modelBuilder.Entity("CarInsurance.Models.Estimate", b =>

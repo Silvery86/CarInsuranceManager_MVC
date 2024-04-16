@@ -1,4 +1,4 @@
-﻿@model Vehicle;
+﻿@model ClaimVM;
 
 <!-- Hero Image Starts here -->
 <div class="hero-image-small hero-small-car">
@@ -6,7 +6,7 @@
         <div class="hero-text-inner">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
-                    <h3><span class="sub-heading-1"></span>Add New Vehicle</h3>
+                    <h3><span class="sub-heading-1"></span>Make New Claim Record</h3>
                 </div>
             </div>
         </div>
@@ -17,67 +17,96 @@
 <div class="container">
 
     <form method="post">
-        <div class="border p-3 mt-4 row justify-content-evenly">
-            <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Name" class="p-0"></label>
-                <select asp-for="Name" id="nameDropdown" class="form-control">
-                    <option value="" disabled>Select Name</option>
-                </select>
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
 
+        <div class="border p-3 mt-4 row justify-content-evenly">
+           
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="OwnerName" class="p-0"></label>
-                <input asp-for="OwnerName" class="form-control" />
-                <span asp-validation-for="OwnerName" class="text-danger"></span>
-            </div>
-            <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Model" class="p-0"></label>
-                <select asp-for="Model" id="modelDropdown" class="form-control">
-                    <option value="" disabled>Select Model</option>
+                <label asp-for="@Model.Claim.VehicleNumber" class="p-0"></label>
+                <select asp-for="@Model.Claim.VehicleNumber" asp-items="@Model.BillList" id="billDropDown" class="form-control">
+                    <option value="" disabled selected>-- Select Insured Vehicle --</option>
                 </select>
-                <span asp-validation-for="Model" class="text-danger"></span>
+                <span asp-validation-for="@Model.Claim.VehicleNumber" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Version" class="p-0"></label>
-                <select asp-for="Version" class="form-control">
-                    @for (int year = DateTime.Now.Year; year >= DateTime.Now.Year - 20; year--)
-                    {
-                        <option value="@year">@year</option>
-                    }
-                </select>
-                <span asp-validation-for="Version" class="text-danger"></span>
+                <label asp-for="@Model.Claim.CustomerName" class="p-0"></label>
+                <input asp-for="@Model.Claim.CustomerName" class="form-control" />
+                <span asp-validation-for="@Model.Claim.CustomerName" class="text-danger"></span>
+            </div> 
+            <input asp-for="@Model.Claim.BillingId" class="form-control" hidden />
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.BillNo" class="p-0"></label>
+                <input asp-for="@Model.Claim.BillNo" class="form-control" readonly/>
+                <span asp-validation-for="@Model.Claim.BillNo" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="VehicleValue" class="p-0"></label>
-                <input asp-for="VehicleValue" class="form-control" />
-                <span asp-validation-for="VehicleValue" class="text-danger"></span>
+                <label asp-for="@Model.Claim.VehiclePolicyType" class="p-0"></label>
+                <input asp-for="@Model.Claim.VehiclePolicyType" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.VehiclePolicyType" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Rate" class="p-0"></label>
-                <select asp-for="Rate" class="form-control">
-                    <option value="50">50%</option>
-                    <option value="70">70%</option>
-                    <option value="75">75%</option>
-                    <option value="90">90%</option>
-                    <option value="100">100%</option>
-                </select>
-                <span asp-validation-for="Rate" class="text-danger"></span>
+                <label asp-for="@Model.Claim.PolicyStartDate" class="p-0"></label>
+                <input asp-for="@Model.Claim.PolicyStartDate" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.PolicyStartDate" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="BodyNumber" class="p-0"></label>
-                <input asp-for="BodyNumber" class="form-control" />
-                <span asp-validation-for="BodyNumber" class="text-danger"></span>
+                <label asp-for="@Model.Claim.PolicyEndDate" class="p-0"></label>
+                <input asp-for="@Model.Claim.PolicyEndDate" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.PolicyEndDate" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="EngineNumber" class="p-0"></label>
-                <input asp-for="EngineNumber" class="form-control" />
-                <span asp-validation-for="EngineNumber" class="text-danger"></span>
+                <label asp-for="@Model.Claim.PolicyDuration" class="p-0"></label>
+                <input asp-for="@Model.Claim.PolicyDuration" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.PolicyDuration" class="text-danger"></span>
             </div>
             <div class="mb-3 row pd-1 col-6">
-                <label asp-for="Number" class="p-0"></label>
-                <input asp-for="Number" class="form-control" />
-                <span asp-validation-for="Number" class="text-danger"></span>
+                <label asp-for="@Model.Claim.VehicleName" class="p-0"></label>
+                <input asp-for="@Model.Claim.VehicleName" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.VehicleName" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.VehicleModel" class="p-0"></label>
+                <input asp-for="@Model.Claim.VehicleModel" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.VehicleModel" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.VehicleVersion" class="p-0"></label>
+                <input asp-for="@Model.Claim.VehicleVersion" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.VehicleVersion" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.VehicleRate" class="p-0"></label>
+                <input asp-for="@Model.Claim.VehicleRate" class="form-control" readonly />
+                <span asp-validation-for="@Model.Claim.VehicleRate" class="text-danger"></span>
+            </div>
+            <input asp-for="@Model.Claim.VehicleNumber" class="form-control" hidden />
+            <input asp-for="@Model.Claim.VehicleValue" class="form-control" hidden />
+           
+            <input asp-for="@Model.Claim.VehicleWarranty" class="form-control" hidden />
+           
+                <input asp-for="@Model.Claim.InsuranceCost" class="form-control" hidden />
+          
+            <div class="mb-3 row pd-1 col-12">
+                <label asp-for="@Model.Claim.PlaceOfAccident" class="p-0"></label>
+                <input asp-for="@Model.Claim.PlaceOfAccident" class="form-control" />
+                <span asp-validation-for="@Model.Claim.PlaceOfAccident" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.DateOfAccident" class="p-0"></label>
+                <input asp-for="@Model.Claim.DateOfAccident" class="form-control" />
+                <span asp-validation-for="@Model.Claim.DateOfAccident" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.InsuranceAmount" class="p-0"></label>
+                <input asp-for="@Model.Claim.InsuranceAmount" class="form-control" />
+                <span asp-validation-for="@Model.Claim.InsuranceAmount" class="text-danger"></span>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <button id="calculateClaimButton" class="btn btn-primary rounded">Calculate Your Claim</butto>
+            </div>
+            <div class="mb-3 row pd-1 col-6">
+                <label asp-for="@Model.Claim.ClaimableAmount" class="p-0"></label>
+                <input asp-for="@Model.Claim.ClaimableAmount" class="form-control" readonly/>
+                <span asp-validation-for="@Model.Claim.ClaimableAmount" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-6 col-md-3">
@@ -93,10 +122,79 @@
     </form>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // When the vehicle dropdown selection changes
+        $("#billDropDown").change(function () {
+           
+            // Get the selected vehicle number
+            var billId = $(this).val();
 
-@section Scripts {
-    @{
-    <partial name="_VehicleList" />
-    <partial name="_ValidationScriptsPartial" />
-    }
-}
+            // Send an AJAX request to fetch the corresponding VehicleName
+            $.ajax({
+                url: "/Customer/Claim/GetBill",
+                method: "POST",
+                data: { billId: billId },
+                success: function (data) {
+                    console.log(data)
+                    // Update the VehicleName input field with the received data
+                    $("input[name='Claim.BillNo']").val(data["billNo"]);
+                    $("input[name='Claim.BillingId']").val(data["id"]);
+                    $("input[name='Claim.CustomerName']").val(data["customerName"]);
+                    $("input[name='Claim.VehiclePolicyType']").val(data["vehiclePolicyType"]);
+                    $("input[name='Claim.PolicyStartDate']").val(formatDateTime(data["policyStartDate"]));
+                    $("input[name='Claim.PolicyEndDate']").val(formatDateTime(data["policyEndDate"]));
+                    $("input[name='Claim.PolicyDuration']").val(data["policyDuration"]);
+                    $("input[name='Claim.VehicleName']").val(data["vehicleName"]);
+                    $("input[name='Claim.VehicleModel']").val(data["vehicleModel"]);
+                    $("input[name='Claim.VehicleVersion']").val(data["vehicleVersion"]);
+                    $("input[name='Claim.VehicleRate']").val(data["vehicleRate"]);
+                    $("input[name='Claim.VehicleNumber']").val(data["vehicleNumber"]);
+                    $("input[name='Claim.VehicleValue']").val(data["vehicleValue"]);
+                    $("input[name='Claim.VehicleWarranty']").val(data["vehicleWarranty"]);
+                    $("input[name='Claim.InsuranceCost']").val(data["amount"]);
+                   
+                   
+                },
+                error: function (xhr, status, error) {
+                    // Handle error if any
+                    console.log(error);
+                }
+
+            });
+        });
+        $("#calculateClaimButton").click(function (event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Get the insurance amount and vehicle rate
+            var insuranceAmount = parseFloat($("input[name='Claim.InsuranceAmount']").val());
+            var vehicleRateStr = $("input[name='Claim.VehicleRate']").val();
+
+            // Parse the vehicle rate string to float
+            var vehicleRate = parseFloat(vehicleRateStr);
+
+            // Check if both insurance amount and vehicle rate have values
+            if (isNaN(insuranceAmount) || isNaN(vehicleRate)) {
+                // Show error message
+                alert("Please enter valid insurance amount and vehicle rate.");
+                return; // Exit function
+            }
+
+            // Calculate claimable amount
+            var claimableAmount = (insuranceAmount * vehicleRate) / 100;
+
+            // Update the claimable amount input field
+            $("input[name='Claim.ClaimableAmount']").val(claimableAmount.toFixed(2));
+        });
+
+        function formatDateTime(datetimeValue) {
+            var date = new Date(datetimeValue);
+            // Format the datetime value as "YYYY-MM-DDTHH:MM" (e.g., "2024-04-16T14:30")
+            var formattedDateTime = date.toISOString().slice(0, 16);
+            return formattedDateTime;
+        }
+    });
+
+</script>
