@@ -1,0 +1,168 @@
+﻿@model Claim;
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12 mt-3">
+                    <h4>View Claim Detail</h4>
+                </div>
+            </div>
+            <div class="container">
+                <form method="post">                   
+                    <input asp-for="Id" hidden />
+                    <input asp-for="CustomerId" hidden />
+                    <input asp-for="BillingId" hidden />
+                    <div class="border p-3 mt-4 row justify-content-evenly">
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="CustomerName" class="p-0"></label>
+                            <input asp-for="CustomerName" class="form-control" readonly/>
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="BillNo" class="p-0"></label>
+                            <input asp-for="BillNo" class="form-control" readonly />
+                            <span asp-validation-for="BillNo" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehiclePolicyType" class="p-0"></label>
+                            <input asp-for="VehiclePolicyType" class="form-control" readonly />
+                            <span asp-validation-for="VehiclePolicyType" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="PolicyStartDate" class="p-0"></label>
+                            <input asp-for="PolicyStartDate" class="form-control" readonly />
+                            <span asp-validation-for="PolicyStartDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="PolicyEndDate" class="p-0"></label>
+                            <input asp-for="PolicyEndDate" class="form-control" readonly />
+                            <span asp-validation-for="PolicyEndDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="PolicyDuration" class="p-0"></label>
+                            <input asp-for="PolicyDuration" class="form-control" readonly />
+                            <span asp-validation-for="PolicyDuration" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleNumber" class="p-0"></label>
+                            <input asp-for="VehicleNumber" class="form-control" readonly />
+                            <span asp-validation-for="VehicleNumber" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleName" class="p-0"></label>
+                            <input asp-for="VehicleName" class="form-control" readonly />
+                            <span asp-validation-for="VehicleName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleModel" class="p-0"></label>
+                            <input asp-for="VehicleModel" class="form-control" readonly />
+                            <span asp-validation-for="VehicleModel" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleVersion" class="p-0"></label>
+                            <input asp-for="VehicleVersion" class="form-control" readonly />
+                            <span asp-validation-for="VehicleVersion" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleValue" class="p-0"></label>
+                            <input asp-for="VehicleValue" class="form-control" readonly />
+                            <span asp-validation-for="VehicleValue" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleRate" class="p-0"></label>
+                            <input asp-for="VehicleRate" class="form-control" readonly />
+                            <span asp-validation-for="VehicleRate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="VehicleWarranty" class="p-0"></label>
+                            <input asp-for="VehicleWarranty" class="form-control" readonly />
+                            <span asp-validation-for="VehicleWarranty" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="InsuranceCost" class="p-0"></label>
+                            <input asp-for="InsuranceCost" class="form-control" readonly />
+                            <span asp-validation-for="InsuranceCost" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="PlaceOfAccident" class="p-0"></label>
+                            <input asp-for="PlaceOfAccident" class="form-control" readonly />
+                            <span asp-validation-for="PlaceOfAccident" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="DateOfAccident" class="p-0"></label>
+                            <input asp-for="DateOfAccident" class="form-control" readonly />
+                            <span asp-validation-for="DateOfAccident" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="InsuranceAmount" class="p-0"></label>
+                            <input asp-for="InsuranceAmount" class="form-control" readonly />
+                            <span asp-validation-for="InsuranceAmount" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row pd-1 col-6">
+                            <label asp-for="ClaimableAmount" class="p-0"></label>
+                            <input asp-for="ClaimableAmount" class="form-control" readonly />
+                            <span asp-validation-for="ClaimableAmount" class="text-danger"></span>
+                        </div>
+                      
+                        <div class="mb-3 row pd-1">
+                            <label asp-for="ClaimStatus" class="p-0">Payment Status</label>
+                            @{
+                                List<SelectListItem> claimStatusList = new List<SelectListItem>
+                            {
+                           
+                            new SelectListItem { Value = "Processing", Text = "Processing", Selected = Model.ClaimStatus == "Processing" },
+                            new SelectListItem { Value = "Cancelled", Text = "Cancelled", Selected = Model.ClaimStatus == "Cancelled" },
+                            new SelectListItem { Value = "Completed", Text = "Completed", Selected = Model.ClaimStatus == "Completed" }
+                            };
+
+                                string badgeClass = Model.ClaimStatus switch
+                                {
+                                    "Pending Payment" => "badge-warning",
+                                    "Processing" => "badge-primary",
+                                    "Cancelled" => "badge-danger",
+                                    "Completed" => "badge-success",
+                                    _ => "badge-success",
+                                };
+                            }
+                            <td class="text-center">
+                                <select class="form-select @badgeClass" asp-for="@Model.ClaimStatus">
+                                    @foreach (var item in claimStatusList)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </td>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                <button type="submit" class="btn btn-primary form-control">Process</button>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Policy" asp-action="Index" class="btn btn-secondary border form-control">
+                                    Back to List <i class="bi bi-backspace"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

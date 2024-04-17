@@ -1,0 +1,112 @@
+﻿@model List<Claim>
+
+
+
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+            <div class="row layout-spacing">
+                <div class="col-lg-12">
+                    <div class="statbox widget box box-shadow">
+                        <div class="widget-content widget-content-area">
+                            <table id="style-3" class="table style-3 dt-table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="checkbox-column text-center"> Customer Name </th>
+                                        
+                                        <th>Vehicle Number</th>
+                                        <th>Policy</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Place Of Accident</th>
+                                        <th>Date Of Accident</th>
+                                        <th>Insurance Amount</th>
+                                        <th>Claimable Amount</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center dt-no-sorting">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var claim in Model)
+                                    {
+
+                                        <tr>
+                                            <td class="checkbox-column text-center"> @claim.CustomerName  </td>
+                                            
+                                           
+                                            <td>@claim.VehicleNumber</td>
+                                            <td>@claim.VehiclePolicyType</td>
+                                            <td>@claim.PolicyStartDate</td>
+                                            <td>@claim.PolicyEndDate</td>
+                                            <td>@claim.PlaceOfAccident</td>
+                                            <td>@claim.DateOfAccident</td>
+                                            <td>@claim.InsuranceAmount</td>
+                                            <td>@claim.ClaimableAmount</td>
+                                           
+                                            @{
+                                                string badgeClass = "";
+                                                string statusText = "";
+
+                                                switch (claim.ClaimStatus)
+                                                {
+                                                    
+                                                    case "Processing":
+                                                        badgeClass = "badge-primary";
+                                                        statusText = "Processing";
+                                                        break;
+                                                    case "Cancelled":
+                                                        badgeClass = "badge-danger";
+                                                        statusText = "Cancelled";
+                                                        break;
+                                                    case "Completed":
+                                                        badgeClass = "badge-success";
+                                                        statusText = "Completed";
+                                                        break;
+                                                    default:
+                                                        badgeClass = "badge-warning";
+                                                        statusText = "Unknown";
+                                                        break;
+                                                }
+                                            }
+
+                                            <td class="text-center"><span class="shadow-none badge @badgeClass">@statusText</span></td>
+                                            <td class="text-center">
+
+                                                @if (statusText != "Completed")
+                                                {
+                                                    <a asp-controller="Claim" asp-action="Process" asp-route-id="@claim.Id" class="btn btn-success btn-rounded mb-2 me-4">Process</a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-controller="Claim" asp-action="View" asp-route-id="@claim.Id" class="btn btn-success btn-rounded mb-2 me-4">View</a>
+                                                }
+                                                                                                
+                                                    
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  END CONTENT AREA  -->
+</div>
+
+<!--  END CONTENT AREA  -->
+@section Scripts {
+    @{
+        <partial name="_TableRecordScript" />
+
+    }
+}
+
+
