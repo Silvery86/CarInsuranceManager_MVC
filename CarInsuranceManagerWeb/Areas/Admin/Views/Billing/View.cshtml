@@ -1,0 +1,174 @@
+﻿@model Billing;
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+
+
+            <div class="row invoice layout-top-spacing layout-spacing">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                    <div class="doc-container">
+
+                        <div class="row">
+
+                            <div class="col-xl-9">
+
+                                <div class="invoice-container">
+                                    <div class="invoice-inbox">
+
+                                        <div id="ct" class="">
+
+                                            <div class="invoice-00001">
+                                                <div class="content-section">
+
+                                                    <div class="inv--head-section inv--detail-section">
+
+                                                        <div class="row">
+
+                                                            <div class="col-sm-6 col-12 mr-auto">
+                                                                <div class="d-flex">
+                                                                    <img class="company-logo" src="~/images/head_logo.png" alt="company">
+                                                                    <h3 class="in-heading align-self-center">Versic Inc.</h3>
+                                                                </div>
+                                                                <p class="inv-street-addr mt-3">8 Ton That Thuyet, My Dinh Ward, Nam Tu Liem District</p>
+                                                                <p class="inv-email-address">info@versic.com</p>
+                                                                <p class="inv-email-address">090 999 999</p>
+                                                            </div>
+
+                                                            <div class="col-sm-6 text-sm-end">
+                                                                <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4"><span class="inv-title">Invoice : </span> <span class="inv-number">@Model.BillNo</span></p>
+                                                                <p class="inv-due-date"><span class="inv-title">Billing Date : </span> <span class="inv-date">@Model.BillingAt</span></p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--detail-section inv--customer-detail-section">
+
+                                                        <div class="row">
+
+                                                            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
+                                                                <p class="inv-to">Invoice To</p>
+                                                            </div>
+
+                                                            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 text-sm-end mt-sm-0 mt-5">
+                                                                <h6 class=" inv-title">Vehicle Detail</h6>
+                                                            </div>
+
+                                                            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
+                                                                <p class="inv-customer-name">@Model.CustomerName</p>
+                                                                <p class="inv-street-addr">@Model.CustomerAddress</p>
+                                                                <p class="inv-phone-number">@Model.CustomerPhoneNumber</p>
+
+                                                            </div>
+
+                                                            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1 text-sm-end">
+                                                                <p class="inv-vehicle-number">@Model.VehicleNumber</p>
+                                                                <p class="inv-vehicle-name">@Model.VehicleName</p>
+                                                                <p class="inv-vehicle-model">@Model.VehicleModel</p>
+                                                                <p class="inv-vehicle-version">@Model.VehicleVersion</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="inv--product-table-section">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead class="">
+                                                                    <tr>
+                                                                        <th scope="col">Policy</th>
+                                                                        <th scope="col">Start Date</th>
+                                                                        <th scope="col">End Date</th>
+
+                                                                        <th class="text-end" scope="col">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <tr>
+                                                                        <td>@Model.VehiclePolicyType</td>
+                                                                        <td>@Model.PolicyStartDate</td>
+                                                                        <td>@Model.PolicyEndDate</td>
+
+                                                                        <td class="text-end">$ @Model.Amount</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="inv--note">
+
+                                                        <div class="row mt-4">
+                                                            <div class="col-sm-12 col-12 order-sm-0 order-1">
+                                                                <p>Note: Thank you for doing Business with us.</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-3">
+
+                                <div class="invoice-actions-btn">
+
+                                    <div class="invoice-action-btn">
+
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-3 col-sm-6">
+                                                <a type="submit" asp-controller="Record" asp-action="SendInvoiceAction" class="btn btn-primary btn-send _effect--ripple waves-effect waves-light">Send Invoice</a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--  BEGIN FOOTER  -->
+    <div class="footer-wrapper">
+        <div class="footer-section f-section-1">
+            <p class="">Copyright © <span class="dynamic-year">2024</span> <a target="_blank" href="https://designreset.com/cork-admin/">T2208E.Team1</a>, All rights reserved.</p>
+        </div>
+        <div class="footer-section f-section-2">
+            <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+        </div>
+    </div>
+    <!--  END FOOTER  -->
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_BillingScript" />
+
+    }
+}

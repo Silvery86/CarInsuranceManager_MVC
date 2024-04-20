@@ -14,8 +14,8 @@
                             <table id="style-3" class="table style-3 dt-table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="checkbox-column text-center"> Customer Name </th>
-                                        
+                                        <th class="checkbox-column text-center"> Date </th>
+                                        <th> Customer Name </th>
                                         <th>Vehicle Number</th>
                                         <th>Policy</th>
                                         <th>Start Date</th>
@@ -33,9 +33,8 @@
                                     {
 
                                         <tr>
-                                            <td class="checkbox-column text-center"> @claim.CustomerName  </td>
-                                            
-                                           
+                                            <td class="checkbox-column text-center"> @claim.ClaimAt  </td>
+                                            <td> @claim.CustomerName  </td>
                                             <td>@claim.VehicleNumber</td>
                                             <td>@claim.VehiclePolicyType</td>
                                             <td>@claim.PolicyStartDate</td>

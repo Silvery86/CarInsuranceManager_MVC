@@ -34,7 +34,21 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
 
             return View(bills);
         }
-
+        public IActionResult View(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Billing? Billing = _unitOfWork.Billing.Get(u => u.Id == id); // Find only work with primary key
+            // Policy? Policy1 = _db.Policys.FirstOrDefault(u => u.Id == id); // Can work with other field not only primary key
+            //Policy? Policy2 = _db.Policys.Where(u => u.Id == id).FirstOrDefault(); // Other method
+            if (Billing == null)
+            {
+                return NotFound();
+            }
+            return View(Billing);
+        }
 
         public async Task<IActionResult> SendInvoiceActionAsync()
         {

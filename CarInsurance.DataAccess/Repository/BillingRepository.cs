@@ -37,5 +37,7 @@ namespace CarInsurance.DataAccess.Repository
 
             return monthlySummary;
         }
+
+
     }
 }

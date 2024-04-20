@@ -11,7 +11,7 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Customer ID")]
-        public string CustomerId { get; set; }
+        public required string CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]
         public ApplicationUser? ApplicationUser { get; set; }
@@ -19,18 +19,18 @@ namespace CarInsurance.Models
         [Required]
         [MaxLength(50)]
         [DisplayName("Customer Name")]
-        public string CustomerName { get; set; }
+        public required string CustomerName { get; set; }
 
         [Required]
         [DisplayName("Billing ID")]
         public int BillingId { get; set; }
 
         [DisplayName("Bill No.")]
-        public string BillNo { get; set; }
+        public required string BillNo { get; set; }
 
         [MaxLength(50)]
         [DisplayName("Vehicle Policy Type")]
-        public string VehiclePolicyType { get; set; }
+        public required string VehiclePolicyType { get; set; }
 
         [Required]
         [DisplayName("Policy Start Date")]
