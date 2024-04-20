@@ -45,9 +45,9 @@
 
                                                 switch (record.PaymentStatus)
                                                 {
-                                                    case "Pending Payment":
+                                                    case "Waiting for aproved":
                                                         badgeClass = "badge-warning";
-                                                        statusText = "Pending Payment";
+                                                        statusText = "Waiting for aproved";
                                                         break;
                                                     case "Processing":
                                                         badgeClass = "badge-primary";
@@ -70,20 +70,35 @@
 
                                             <td class="text-center"><span class="shadow-none badge @badgeClass">@statusText</span></td>
                                             <td class="text-center">
-                                                @if (statusText != "Completed")
+                                                @switch (statusText)
                                                 {
-                                                    <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-success btn-rounded mb-2 me-4">Process</a>
-                                                }
-                                                else
-                                                {
-                                                    @if (record.isBilled)
-                                                    {
-                                                        <a asp-controller="Record" asp-action="Index"  class="btn btn-warning btn-rounded mb-2 me-4">Billed</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a asp-controller="Record" asp-action="Billing" asp-route-id="@record.Id" class="btn btn-primary btn-rounded mb-2 me-4">Billing</a>
-                                                    }
+                                                    case "Completed":
+                                                        // If the status is Completed
+                                                        if (record.isBilled)
+                                                        {
+                                                            <a asp-controller="Record" asp-action="Index" class="btn btn-warning btn-rounded mb-2 me-4">Billed</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-controller="Record" asp-action="Billing" asp-route-id="@record.Id" class="btn btn-primary btn-rounded mb-2 me-4">Billing</a>
+                                                        }
+                                                        break;
+                                                    case "Cancelled":
+                                                        // If the status is Cancelled
+                                                        
+                                                        break;
+                                                    case "Waiting for aproved":
+                                                        // If the status is Waiting for aproved
+                                                        <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-info btn-rounded mb-2 me-4">Process</a>
+                                                        break;
+                                                    case "Process":
+                                                        // If the status is Process
+                                                        <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-success btn-rounded mb-2 me-4">Process</a>
+                                                        break;
+                                                    default:
+                                                        // If none of the above cases match
+                                                        <a asp-controller="Record" asp-action="Process" asp-route-id="@record.Id" class="btn btn-primary btn-rounded mb-2 me-4">Process</a>
+                                                        break;
                                                 }
                                             </td>
                                         

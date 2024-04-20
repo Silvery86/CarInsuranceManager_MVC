@@ -51,7 +51,10 @@
 
                                                 switch (claim.ClaimStatus)
                                                 {
-                                                    
+                                                    case "Waiting for aproved":
+                                                        badgeClass = "badge-warning";
+                                                        statusText = "Waiting for aproved";
+                                                        break;
                                                     case "Processing":
                                                         badgeClass = "badge-primary";
                                                         statusText = "Processing";
@@ -81,9 +84,8 @@
                                                 else
                                                 {
                                                     <a asp-controller="Claim" asp-action="View" asp-route-id="@claim.Id" class="btn btn-success btn-rounded mb-2 me-4">View</a>
-                                                }
-                                                                                                
-                                                    
+                                                }                                              
+
                                             </td>
 
                                         </tr>

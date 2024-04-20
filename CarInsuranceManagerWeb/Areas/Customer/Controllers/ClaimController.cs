@@ -96,7 +96,7 @@ namespace CarInsuranceManagerWeb.Areas.Customer.Controllers
                 DateOfAccident = claimVM.Claim.DateOfAccident,
                 InsuranceAmount = claimVM.Claim.InsuranceAmount,
                 ClaimableAmount = claimVM.Claim.ClaimableAmount,
-                ClaimStatus = "Processing",
+                ClaimStatus = "Waiting for aproved",
             };
 
             if (ModelState.IsValid)

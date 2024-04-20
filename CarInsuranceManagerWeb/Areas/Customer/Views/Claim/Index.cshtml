@@ -79,7 +79,10 @@
 
                                             switch (claim.ClaimStatus)
                                             {
-                                                
+                                                case "Waiting for aproved":
+                                                    badgeClass = "badge-warning";
+                                                    statusText = "Processing";
+                                                    break;
                                                 case "Processing":
                                                     badgeClass = "badge-primary";
                                                     statusText = "Processing";

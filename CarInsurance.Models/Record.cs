@@ -89,7 +89,7 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Payment Status")]
-        public string PaymentStatus { get; set; } = "Pending Payment";
+        public string PaymentStatus { get; set; } = "Waiting for aproved";
 
 
         public bool isBilled { get; set; } = false;

@@ -113,7 +113,7 @@
                             @{
                                 List<SelectListItem> claimStatusList = new List<SelectListItem>
                             {
-                           
+                            new SelectListItem { Value = "Waiting for aproved", Text = "Waiting for aproved", Selected = Model.ClaimStatus == "Waiting for aproved" },
                             new SelectListItem { Value = "Processing", Text = "Processing", Selected = Model.ClaimStatus == "Processing" },
                             new SelectListItem { Value = "Cancelled", Text = "Cancelled", Selected = Model.ClaimStatus == "Cancelled" },
                             new SelectListItem { Value = "Completed", Text = "Completed", Selected = Model.ClaimStatus == "Completed" }
@@ -121,7 +121,7 @@
 
                                 string badgeClass = Model.ClaimStatus switch
                                 {
-                                    "Pending Payment" => "badge-warning",
+                                    "Waiting for aproved" => "badge-warning",
                                     "Processing" => "badge-primary",
                                     "Cancelled" => "badge-danger",
                                     "Completed" => "badge-success",

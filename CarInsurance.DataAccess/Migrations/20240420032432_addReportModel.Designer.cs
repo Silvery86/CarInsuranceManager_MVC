@@ -4,6 +4,7 @@ using CarInsurance.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarInsurance.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240420032432_addReportModel")]
+    partial class addReportModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,9 +132,6 @@ namespace CarInsurance.DataAccess.Migrations
 
                     b.Property<int>("BillingId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ClaimAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ClaimStatus")
                         .IsRequired()
@@ -300,28 +300,6 @@ namespace CarInsurance.DataAccess.Migrations
                     b.ToTable("Estimates");
                 });
 
-            modelBuilder.Entity("CarInsurance.Models.ExpenseReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpenseReports");
-                });
-
             modelBuilder.Entity("CarInsurance.Models.Policy", b =>
                 {
                     b.Property<int>("Id")
@@ -473,28 +451,6 @@ namespace CarInsurance.DataAccess.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Records");
-                });
-
-            modelBuilder.Entity("CarInsurance.Models.RevenueReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RevenueReports");
                 });
 
             modelBuilder.Entity("CarInsurance.Models.Vehicle", b =>

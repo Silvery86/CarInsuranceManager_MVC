@@ -6,6 +6,7 @@ namespace CarInsurance.DataAccess.Repository.IRepository
     {
         void Update(Billing obj);
         IEnumerable<Billing> GetAllByUserId(string userId);
+        IEnumerable<RevenueReport> GetRevenueReport();
 
     }
 }

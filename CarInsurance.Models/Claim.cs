@@ -96,6 +96,10 @@ namespace CarInsurance.Models
 
         [Required]
         [DisplayName("Claim Status")]
-        public string ClaimStatus { get; set; } = "Processing";
+        public string ClaimStatus { get; set; } = "Waiting for aproved";
+
+
+        [DisplayName("Claim At")]
+        public DateTime? ClaimAt { get; set; } = DateTime.Now;
     }
 }

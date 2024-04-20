@@ -80,7 +80,7 @@
                 @{
                     List<SelectListItem> paymentStatusList = new List<SelectListItem>
                 {
-                new SelectListItem { Value = "Pending Payment", Text = "Pending Payment", Selected = Model.PaymentStatus == "Pending Payment" },
+                            new SelectListItem { Value = "Waiting for aproved", Text = "Waiting for aproved", Selected = Model.PaymentStatus == "Waiting for aproved" },
                 new SelectListItem { Value = "Processing", Text = "Processing", Selected = Model.PaymentStatus == "Processing" },
                 new SelectListItem { Value = "Cancelled", Text = "Cancelled", Selected = Model.PaymentStatus == "Cancelled" },
                 new SelectListItem { Value = "Completed", Text = "Completed", Selected = Model.PaymentStatus == "Completed" }
@@ -88,7 +88,7 @@
 
                     string badgeClass = Model.PaymentStatus switch
                     {
-                        "Pending Payment" => "badge-warning",
+                                    "Waiting for aproved" => "badge-warning",
                         "Processing" => "badge-primary",
                         "Cancelled" => "badge-danger",
                         "Completed" => "badge-success",

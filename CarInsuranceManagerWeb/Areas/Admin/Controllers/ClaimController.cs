@@ -59,6 +59,10 @@ namespace CarInsuranceManagerWeb.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // Update other properties as needed
+                if (claim.ClaimStatus == "Complete")
+                {
+                    claim.ClaimAt = DateTime.Now;
+                }
 
                 _unitOfWork.Claim.Update(claim);
                 TempData["success"] = "Claim Record edited successfully";

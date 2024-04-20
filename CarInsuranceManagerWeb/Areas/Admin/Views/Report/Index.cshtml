@@ -1,0 +1,81 @@
+﻿@model RevenueExpenseVM;
+@{
+    ViewData["Title"] = "Index";
+}
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="middle-content container-xxl p-0">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12 mt-3">
+                    <h4>Revenue Summary</h4>
+                </div>
+            </div>
+
+            <div class="row layout-top-spacing">
+                <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                    <div class="widget-content widget-content-area br-8">
+                        <div id="zero-config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                            <table id="zero-config" class="table table-striped dt-table-hover dataTable" style="width: 100%;" role="grid" aria-describedby="zero-config_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Month / Year</th>
+
+                                        <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Revenue</th>
+                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var obj in Model.RevenueReport)
+                                    {
+                                        <tr>
+                                            <td>@obj.Month/@obj.Year</td>
+                                            <td>@obj.TotalAmount</td>
+                                   
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Month / Year</th>
+
+                                        <th class="sorting_asc" tabindex="0" aria-controls="zero-config" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 200px;">Expense</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var obj in Model.ExpenseReport)
+                                    {
+                                        <tr>
+                                            <td>@obj.Month/@obj.Year</td>
+                                            <td>@obj.TotalAmount</td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+
+</div>
+
+      
+
+<!--  END CONTENT AREA  -->
+<!--  BEGIN CONTENT AREA  -->
+
+@section Scripts {
+    @{
+        <partial name="_TableScript" />
+
+    }
+}
+

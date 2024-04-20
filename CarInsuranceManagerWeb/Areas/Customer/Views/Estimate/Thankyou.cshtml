@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 m-auto text-center">
                     <h3><span class="sub-heading-1"></span>Thank you for your submission!</h3>
+                    <p>We appreciate your decision to purchase insurance with us. Our team will contact you as soon as possible to process your insurance.</p>
                 </div>
             </div>
         </div>
@@ -13,9 +14,18 @@
 </div>
 <hr />
 <!-- Hero Image Ends here -->
-<p>Customer Name: @Model.CustomerName</p>
-<p>Vehicle Number: @Model.VehicleNumber</p>
-<label>
-    <a asp-controller="Record" asp-action="Index" class="btn btn-primary form-control ">View Your New Policy Record</a>
-</label>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Customer Name:</strong> @Model.CustomerName</p>
+            <p><strong>Vehicle Number:</strong> @Model.VehicleNumber</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <a asp-controller="Record" asp-action="Index" class="btn btn-primary">View Your New Policy Record</a>
+        </div>
+    </div>
+</div>
 <!-- Display other properties as needed -->
